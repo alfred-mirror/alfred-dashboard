@@ -1,0 +1,30 @@
+.auth-container {
+    position: absolute;
+    height: 400px;
+    width: 600px;
+    background-color: rgba(173, 191, 204, 0.9);
+    left: calc((100% - 600px)/2);
+    top: calc((100% - 420px)/2);
+    border-radius: 5px;
+
+    .auth-box {
+        position: relative;
+        color: black;
+        height: auto;
+        width: 300px;
+        margin: 0 auto;
+        top: 60px;
+
+        .input {
+            position: relative;
+            width: 100%;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: black;
+        }
+    }
+}
