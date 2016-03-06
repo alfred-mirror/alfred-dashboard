@@ -1,0 +1,27 @@
+.event-container{
+	position: relative;
+	height: 700px;
+	width: 1000px;
+	margin: 0 auto;
+	background-color: white;
+	border: 1px solid black;
+
+	.event-container-inside{
+		position: relative;
+		height: 100%;
+		width: 100%;
+		margin: 0px 5px 0px 5px;
+		padding: 0px;
+
+
+		.event-item{
+			height: 250px;
+			width: 200px;
+			background-color: lightblue;
+			border-radius: 5px;
+			float: left;
+			margin: 10px;
+		}
+	}
+
+}
