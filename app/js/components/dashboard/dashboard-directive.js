@@ -7,7 +7,7 @@ module.exports = function(app) {
       scope: {
         options: '='
       },
-      controller: function($scope, Butler, $window) {
+      controller: function($scope, Butler, $window, AuthFactory) {
         $scope.configs = [];
         $scope.currentConfig = {};
         $scope.state = {
@@ -35,6 +35,9 @@ module.exports = function(app) {
         $scope.editConfig = function(config) {
           $scope.currentConfig = config;
           $scope.state.editing = true;
+
+        $scope.logout = function(){
+          AuthFactory.logout();
         };
         /// Load user preferences
         $scope.getConfig = function() {
