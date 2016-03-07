@@ -8,6 +8,8 @@
 	</head>
 	<body data-ng-app="alfred">
 		<ng-include src="'templates/auth.html'"></ng-include>
-		<dashboard></dashboard>
+		<section data-ng-controller="HomeController">
+			<dashboard data-ng-if="userAuthenticated"></dashboard>
+		</section>
 	</body>
 </html>

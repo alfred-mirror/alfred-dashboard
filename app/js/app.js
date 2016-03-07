@@ -24,5 +24,11 @@ alfred.config(function($httpProvider) {
 .controller('HomeController', ['$scope',
   function($scope) {
 
+  	$scope.userAuthenticated = false;
+
+  	$scope.$on('USER_AUTHENTICATED', function(){
+  		$scope.userAuthenticated = true;
+  	})
+
   }
 ]);

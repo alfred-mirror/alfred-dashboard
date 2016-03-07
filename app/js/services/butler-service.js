@@ -1,11 +1,11 @@
 module.exports = function(app) {
-  app.factory('Butler', ['$http',
-    function($http) {
+  app.factory('Butler', ['$http', '$window',
+    function($http, $window) {
     const baseURI = 'http://localhost:8080/dashboard/preferences'
       return {
+      	// Load User Preferences
         getPreferences: function() {
-        	var url = baseURI;
-        	return $http.get(url);
+        	return $http.get(baseURI);
         }
       }
     }
