@@ -5,9 +5,11 @@ var alfred = angular.module('alfred', []);
 
 // Require Services
 require('./services/services-index.js')(alfred);
-
 // Require Auth
 require('./components/auth/auth-index.js')(alfred);
+// Require Dashboard
+require('./components/dashboard/dashboard-index.js')(alfred);
+
 
 // Add Token Middleware
 alfred.config(function($httpProvider) {
