@@ -14,7 +14,7 @@ module.exports = function(app) {
 
       $scope.$on('USER_AUTHENTICATED', () => {
         $scope.showAuthBox = false;
-      })
+      });
     }
   ])
   // Login Controller
@@ -30,12 +30,12 @@ module.exports = function(app) {
             // Save token
             $window.sessionStorage.token = res.data.token;
             // Save user ID
-            $window.sessionStorage._id = res.data.user._id
+            $window.sessionStorage._id = res.data.user._id;
             // Broadcast event and user ID
             EE.emit('USER_AUTHENTICATED', res.data.user._id);
           } else {
             // Alert no user
-            $rootScope.loginMessage = 'No User Found.'
+            $rootScope.loginMessage = 'No User Found.';
           }
           // Check for error
         }, function(err) {
@@ -55,19 +55,19 @@ module.exports = function(app) {
             // Save token
             $window.sessionStorage.token = res.data.token;
             // Save user ID
-            $window.sessionStorage._id = res.data.user._id
+            $window.sessionStorage._id = res.data.user._id;
             // Broadcast event and user ID
             EE.emit('USER_AUTHENTICATED', res.data.user._id);
           } else {
             // Alert no user
-            $rootScope.loginMessage = 'Email already registered.'
+            $rootScope.loginMessage = 'Email already registered.';
           }
           // Check for error
         }, function(err) {
           $rootScope.loginMessage =
-            'There was an error. Please try again.'
-        })
+            'There was an error. Please try again.';
+        });
       };
     }
-  ])
-}
+  ]);
+};

@@ -1,3 +1,3 @@
 module.exports = function(app){
-	require('./auth.js')(app);
-}
+  require('./auth.js')(app);
+};
