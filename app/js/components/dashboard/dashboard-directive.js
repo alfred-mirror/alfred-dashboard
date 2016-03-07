@@ -8,6 +8,14 @@ module.exports = function(app) {
         options: '='
       },
       controller: function($scope, Butler, $window) {
+
+        $scope.configs = [];
+        $scope.currentConfig = {};
+
+        $scope.state = {
+          editing: false
+        };
+
         // Store UserId
         $scope.user_id = $window.sessionStorage._id;
 
@@ -16,12 +24,18 @@ module.exports = function(app) {
           $scope.getPreferences();
         });
 
+        // Edit Config File
+        $scope.editConfig = function(config){
+          $scope.currentConfig =  config;
+          $scope.state.editing = true;
+        };
+
         /// Load user preferences
         $scope.getPreferences = function() {
           Butler.getPreferences()
             .then(function(res) {
               console.log(res.data);
-              $scope.preferences = res.data;
+              $scope.configs = res.data;
             }, function(err) {
               console.log(err);
             });
