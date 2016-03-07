@@ -8,17 +8,11 @@ module.exports = function(app) {
         options: '='
       },
       controller: function($scope, Butler, $window) {
-
-        // Hide Auth Container
-        $scope.show = false;
-
         // Store UserId
         $scope.user_id = $window.sessionStorage._id;
 
         // Show Auth Container
         $scope.$on('USER_AUTHENTICATED', function() {
-          $scope.show = true;
-          console.log('Emitted');
           $scope.getPreferences();
         });
 
@@ -26,13 +20,12 @@ module.exports = function(app) {
         $scope.getPreferences = function() {
           Butler.getPreferences()
             .then(function(res) {
-              $scope.preferences = res.data.preferences;
+              console.log(res.data);
+              $scope.preferences = res.data;
             }, function(err) {
               console.log(err);
             });
         }
-
-
       }
     }
   })
