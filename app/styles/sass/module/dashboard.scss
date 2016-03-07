@@ -1,0 +1,17 @@
+.config-container {
+    position: relative;
+    min-height: 400px;
+    height: auto;
+    width: 200px;
+    border: 1px solid black;
+	margin: 0 auto;
+
+
+	.config-item{
+		position: relative;
+		height: 40px;
+		width: 100%;
+		background: lightblue;
+	}
+
+}

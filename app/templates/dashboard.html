@@ -1,5 +1,13 @@
 <section data-ng-init="getPreferences()">
-	lkajfljaskf
-	<br/>
-	{{preferences.owner_id}}
+	<section class="config-container">
+		<article class="config-item" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
+			{{config.name}}
+			name
+		</article>
+	</section>
+	<section data-ng-if="state.editing" >
+		<form data-ng-submit="updateConfig(currentConfig)">
+			
+		</form>
+	</section>
 </section>
