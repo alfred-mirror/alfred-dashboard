@@ -2,12 +2,11 @@
 module.exports = function(app) {
   app.factory('AuthFactory', ['$http',
     function($http) {
-      baseURI = 'http://localhost:8080/auth';
+      const baseURI = 'http://localhost:8080/auth';
       return {
         login: function(data) {
-
           var headerData = data.email + ':' + data.password;
-          var headerData = btoa(headerData);
+          headerData = btoa(headerData);
 
           return $http({
             method: 'GET',
@@ -17,6 +16,7 @@ module.exports = function(app) {
             }
           });
         },
+
         register: function(data) {
           var toSend = {
             authentication: {
@@ -31,7 +31,7 @@ module.exports = function(app) {
             data: toSend
           });
         }
-      }
+      };
     }
   ]);
-}
+};

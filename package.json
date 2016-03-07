@@ -1,30 +1,31 @@
 {
-  "name": "hyper",
+  "name": "alfred-dashboard",
   "version": "1.0.0",
-  "description": "Client side for the event-list API.",
+  "description": "Client-side dashboard app for the smart mirror, Alfred",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/samheutmaker/hyper.git"
+    "url": "git+https://github.com/alfred-mirror/alfred-dashboard.git"
   },
   "keywords": [
-    "event",
-    "list",
-    "event-list",
-    "hyper",
-    "local",
-    "hyperlocale",
-    "seattle"
+    "node",
+    "internet",
+    "of",
+    "things",
+    "IoT",
+    "Alfred",
+    "AI",
+    "mirror"
   ],
-  "author": "samheutmaker@gmail.com",
+  "author": "samheutmaker@gmail.com, jamesvermillion@yahoo.com, cychownat@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/samheutmaker/hyper/issues"
+    "url": "https://github.com/alfred-mirror/alfred-dashboard/issues"
   },
-  "homepage": "https://github.com/samheutmaker/hyper#readme",
+  "homepage": "https://github.com/alfred-mirror/alfred-dashboard#readme",
   "dependencies": {
     "express": "^4.13.4"
   },
@@ -36,6 +37,8 @@
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^2.0.0",
     "gulp-sass": "^2.2.0",
     "jasmine": "^2.4.1",
     "karma": "^0.13.21",

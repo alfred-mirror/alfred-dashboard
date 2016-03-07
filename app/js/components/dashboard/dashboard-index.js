@@ -1,3 +1,3 @@
 module.exports = function(app) {
-	require('./dashboard-directive')(app);
-}
+  require('./dashboard-directive')(app);
+};
