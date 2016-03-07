@@ -13,3 +13,13 @@ function mouseCoords(e) {
     return { x: e.pageX, y: e.pageY };
   }
 }
+
+function mouseUp(e) {
+  dragObject = null;
+}
+
+function clickItem(obj) {
+  object.onmousedown = function() {
+    dragObject = this;
+  };
+}
