@@ -8,31 +8,37 @@ module.exports = function(app) {
         options: '='
       },
       controller: function($scope, Butler, $window) {
-
         $scope.configs = [];
         $scope.currentConfig = {};
-
         $scope.state = {
           editing: false
         };
-
         // Store UserId
         $scope.user_id = $window.sessionStorage._id;
-
         // Show Auth Container
         $scope.$on('USER_AUTHENTICATED', function() {
-          $scope.getPreferences();
+          $scope.getConfig();
         });
-
+        // Update config file on server
+        $scope.updateConfig = function(config) {
+          // Update config on server
+          Butler.updateConfig(config)
+            .then(function(res) {
+              // Update Events
+              $scope.getConfig();
+            }, function(err) {
+              // Error
+              console.log(err);
+            });
+        };
         // Edit Config File
-        $scope.editConfig = function(config){
-          $scope.currentConfig =  config;
+        $scope.editConfig = function(config) {
+          $scope.currentConfig = config;
           $scope.state.editing = true;
         };
-
         /// Load user preferences
-        $scope.getPreferences = function() {
-          Butler.getPreferences()
+        $scope.getConfig = function() {
+          Butler.getConfig()
             .then(function(res) {
               console.log(res.data);
               $scope.configs = res.data;

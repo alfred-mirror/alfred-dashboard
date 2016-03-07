@@ -4,8 +4,7 @@
     height: auto;
     width: 200px;
     border: 1px solid black;
-	margin: 0 auto;
-
+    float: left;
 
 	.config-item{
 		position: relative;
@@ -14,4 +13,13 @@
 		background: lightblue;
 	}
 
+}
+
+
+.config-editor {
+	height: 500px;
+	width: 500px;
+	position: relative;
+	border: 1px solid lightgrey;
+	float: left;
 }
