@@ -1,5 +1,6 @@
 <section data-ng-init="getPreferences()">
 	<section class="config-container">
+		<button class="message" data-ng-click="logout()">Logout</button>
 		<article class="config-item" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
 			{{config.name}}
 			name
@@ -7,7 +8,7 @@
 	</section>
 	<section data-ng-if="state.editing" >
 		<form data-ng-submit="updateConfig(currentConfig)">
-			
+
 		</form>
 	</section>
 </section>

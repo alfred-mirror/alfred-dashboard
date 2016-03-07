@@ -7,15 +7,7 @@ module.exports = function(app) {
       scope: {
         options: '='
       },
-      controller: function($scope, Butler, $window) {
-
-        $scope.configs = [];
-        $scope.currentConfig = {};
-
-        $scope.state = {
-          editing: false
-        };
-
+      controller: function($scope, Butler, $window, AuthFactory) {
         // Store UserId
         $scope.user_id = $window.sessionStorage._id;
 
@@ -28,6 +20,9 @@ module.exports = function(app) {
         $scope.editConfig = function(config){
           $scope.currentConfig =  config;
           $scope.state.editing = true;
+          
+        $scope.logout = function(){
+          AuthFactory.logout();
         };
 
         /// Load user preferences
