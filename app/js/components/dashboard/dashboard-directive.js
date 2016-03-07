@@ -36,8 +36,8 @@ module.exports = function(app) {
           $scope.currentConfig = config;
           $scope.state.editing = true;
         };
-
-        $scope.logout = function(){
+        // Logout
+        $scope.logout = function() {
           AuthFactory.logout();
         };
         /// Load user preferences
