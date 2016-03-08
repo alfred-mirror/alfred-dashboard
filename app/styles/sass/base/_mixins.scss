@@ -1,0 +1,21 @@
+@mixin global-module($background, $color) {
+  background-color: $background;
+  color: $color;
+  h1, h2, h3 {
+    font-family: $type-header, Arial;
+  }
+  p, label {
+    font-family: $type-body, sans-serif;
+  }
+}
+
+@mixin form {
+  input {
+    height: 1.75em;
+    font-size: 1em;
+    padding: 0.4em 0.7em;
+    border-radius: 3px;
+    border: none;
+    color: lighten($color-sec-slate, 30%);
+  }
+}

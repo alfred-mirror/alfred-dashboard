@@ -1,20 +1,15 @@
 .auth-container {
-  position: absolute;
-  height: 400px;
-  width: 600px;
-  background-color: rgba(173, 191, 204, 0.9);
-  left: calc((100% - 600px)/2);
-  top: calc((100% - 420px)/2);
-  border-radius: 5px;
+  background-color: $color-pri-slate;
 
   .auth-box {
     position: relative;
-    color: black;
+    color: $color-global-white;
     height: auto;
     width: 300px;
     margin: 0 auto;
-    top: 60px;
+    // top: 60px;
 
+    @include form;
     .input {
       position: relative;
       width: 100%;

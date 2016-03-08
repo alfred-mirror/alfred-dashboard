@@ -1,18 +1,19 @@
+<!-- <section class="main-logo col-md-5 center-xs">
+	<p>This is a temporary container</p>
+</section> -->
 <!-- Auth Box -->
-	<section class="auth-container" data-ng-controller="AuthController" ng-show="showAuthBox">
+	<section class="auth-container col-md-7 center-xs" data-ng-controller="AuthController" ng-show="showAuthBox">
 		<!-- Login -->
 
 		<section class="auth-box login-box" data-ng-show="login">
 			<div data-ng-controller="LoginController">
 				<h2>Login</h2>
 				<form class="pure-form pure-form-stacked" data-ng-submit="login(userLoginData)">
-					<fieldset>
-						<input placeholder="email" class="input" type="email" name="email" ng-model="userLoginData.email" />
+					<input placeholder="email" class="input" type="email" name="email" ng-model="userLoginData.email" />
 
-						<input placeholder="password" class="input" type="password" name="password" ng-model="userLoginData.password" />
+					<input placeholder="password" class="input" type="password" name="password" ng-model="userLoginData.password" />
 
-						<button type="submit" class="pure-button pure-button-primary">Sign in</button>
-					</fieldset>
+					<button type="submit" class="pure-button pure-button-primary">Sign in</button>
 				</form>
 			</div>
 			<p class="message" data-ng-click="login = false;">Need an acount? <a href="#">Register</a></p>
@@ -24,14 +25,12 @@
 			<div data-ng-controller="RegisterController">
 				<h2>Register</h2>
 				<form class="pure-form pure-form-stacked" data-ng-submit="register(userRegisterData)">
-					<fieldset>
-						<input placeholder="email" class="input" type="email" name="email" ng-model="userRegisterData.email" />
+					<input placeholder="Email" class="input" type="email" name="email" ng-model="userRegisterData.email" />
 
-						<input placeholder="password" class="input" type="password" name="password" ng-model="userRegisterData.password" />
-						<input placeholder="password, again" class="input" type="password" name="passwordCheck" ng-model="userRegisterData.passwordCheck" />
+					<input placeholder="Password" class="input" type="password" name="password" ng-model="userRegisterData.password" />
+					<input placeholder="Confirm password" class="input" type="password" name="passwordCheck" ng-model="userRegisterData.passwordCheck" />
 
-						<button type="submit" class="pure-button pure-button-primary">Register</button>
-					</fieldset>
+					<button type="submit" class="pure-button pure-button-primary">Register</button>
 				</form>
 
 			</div>
