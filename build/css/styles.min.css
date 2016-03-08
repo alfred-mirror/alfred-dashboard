@@ -1,0 +1,75 @@
+body, html {
+  height: 100%;
+  padding: 0px;
+  margin: 0px; }
+
+nav {
+  height: 100px;
+  width: 100%;
+  position: relative;
+  background-color: lightblue; }
+
+.auth-container {
+  position: absolute;
+  height: 400px;
+  width: 600px;
+  background-color: rgba(173, 191, 204, 0.9);
+  left: calc((100% - 600px)/2);
+  top: calc((100% - 420px)/2);
+  border-radius: 5px; }
+  .auth-container .auth-box {
+    position: relative;
+    color: black;
+    height: auto;
+    width: 300px;
+    margin: 0 auto;
+    top: 60px; }
+    .auth-container .auth-box .input {
+      position: relative;
+      width: 100%;
+      color: black;
+      margin-bottom: 10px; }
+    .auth-container .auth-box .message {
+      font-size: 18px;
+      color: black; }
+
+.config-container {
+  position: relative;
+  min-height: 400px;
+  height: auto;
+  width: 200px;
+  border: 1px solid black;
+  float: left; }
+  .config-container .config-item {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    background: lightblue; }
+
+.config-editor {
+  height: 500px;
+  width: 500px;
+  position: relative;
+  border: 1px solid lightgrey;
+  float: left; }
+
+.event-container {
+  position: relative;
+  height: 700px;
+  width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid black; }
+  .event-container .event-container-inside {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0px 5px 0px 5px;
+    padding: 0px; }
+    .event-container .event-container-inside .event-item {
+      height: 250px;
+      width: 200px;
+      background-color: lightblue;
+      border-radius: 5px;
+      float: left;
+      margin: 10px; }

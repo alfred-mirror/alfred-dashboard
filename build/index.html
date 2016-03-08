@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Alfred Dashboard</title>
+		<link rel="stylesheet" href="css/styles.min.css">
+		<script src="bundle.js"></script>
+	</head>
+	<body data-ng-app="alfred">
+		<ng-include src="'templates/auth.html'"></ng-include>
+		<section data-ng-controller="HomeController">
+			<dashboard data-ng-if="userAuthenticated"></dashboard>
+		</section>
+	</body>
+</html>
