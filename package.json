@@ -1,6 +1,9 @@
 {
   "name": "alfred-dashboard",
   "version": "1.0.0",
+  "engines": {
+    "node" : ">=4.2.0"
+    },
   "description": "Client-side dashboard app for the smart mirror, Alfred",
   "main": "server.js",
   "scripts": {
