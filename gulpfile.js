@@ -31,7 +31,7 @@ gulp.task('webpack:dev', () => {
 });
 
 gulp.task('sass:all', () => {
-  gulp.src(files.sass)
+  gulp.src('/app/styles/sass/manifest.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('styles.min.css'))
     .pipe(gulp.dest(__dirname + '/build/css/'));
