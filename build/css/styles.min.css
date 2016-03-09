@@ -769,7 +769,13 @@ nav {
 
 .auth-container {
   background-color: "";
-  color: #2A2A2A; }
+  color: #2A2A2A;
+  text-align: center;
+  background-image: url("/images/main_logo_auth.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%; }
   .auth-container h1, .auth-container h2, .auth-container h3 {
     font-family: "Slabo", Arial;
     font-weight: 700; }
@@ -778,9 +784,10 @@ nav {
   .auth-container .auth-box {
     position: relative;
     color: #2A2A2A;
-    height: 500px;
+    height: 100%;
     width: 270px;
-    margin: 0 auto; }
+    margin: 0 auto;
+    padding: 6.5em 0 0 0; }
     .auth-container .auth-box input {
       height: 1.75em;
       font-size: 1em;
@@ -813,39 +820,39 @@ nav {
   background-size: cover; }
 
 .dashboard-page {
-  position: absolute;
   height: 100%;
   width: 100%; }
 
 .profile-container {
-  height: 200px;
-  width: 300px;
-  border-right: 1px solid rgba(0, 0, 0, 0.4);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  position: relative;
-  top: 0px;
-  left: 0px; }
+  background-color: #2A2A2A;
+  color: #FFFFFF;
+  text-align: center; }
+  .profile-container h1, .profile-container h2, .profile-container h3 {
+    font-family: "Slabo", Arial;
+    font-weight: 700; }
+  .profile-container p, .profile-container label {
+    font-family: "Josefin Sans", sans-serif; }
 
 .config-container {
-  position: relative;
-  height: calc(100% - 200px);
-  left: 0px;
-  width: 300px;
-  border-right: 1px solid rgba(0, 0, 0, 0.4); }
+  background-color: #FBBB1C;
+  color: #2A2A2A;
+  text-align: center;
+  height: 3em; }
+  .config-container h1, .config-container h2, .config-container h3 {
+    font-family: "Slabo", Arial;
+    font-weight: 700; }
+  .config-container p, .config-container label {
+    font-family: "Josefin Sans", sans-serif; }
   .config-container .config-item {
-    position: relative;
-    height: 100px;
-    width: 100%;
-    background: lightblue;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4); }
+    font-family: 'Slabo';
+    font-weight: 700;
+    text-align: center;
+    height: 100%;
+    vertical-align: center; }
 
 .config-editor {
   height: 500px;
   width: 500px;
-  position: absolute;
-  left: 300px;
-  top: 0px;
-  float: left;
   border: 1px solid lightgrey; }
 
 .event-container {

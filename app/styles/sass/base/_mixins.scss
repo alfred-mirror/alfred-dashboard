@@ -1,6 +1,7 @@
 @mixin global-module($color, $background: '') {
   @if $background { background-color: $background; }
   color: $color;
+  text-align: center;
   h1, h2, h3 {
     font-family: $type-body, Arial;
     font-weight: 700;

@@ -1,32 +1,21 @@
-.dashboard-page{
-	position: absolute;
+.dashboard-page {
 	height: 100%;
 	width: 100%;
 }
-.profile-container{
-	height: 200px;
-	width: 300px;
-	border-right: 1px solid rgba(0,0,0,0.4);
-	border-bottom: 1px solid rgba(0,0,0,0.4);
-	position: relative;
-	top: 0px;
-	left: 0px;
+.profile-container {
+  @include global-module($color-global-white, $color-pri-slate);
 }
 
 .config-container {
-    position: relative;
-    height: calc(100% - 200px);
-    left: 0px;
-    width: 300px;
-    border-right: 1px solid rgba(0,0,0,0.4);
-    
+  @include global-module($color-pri-slate, $color-tert-orange);
+  height: 3em;
 
-	.config-item{
-		position: relative;
-		height: 100px;
-		width: 100%;
-		background: lightblue;
-		border-bottom: 1px solid rgba(0,0,0,0.4);
+	.config-item {
+    font-family: 'Slabo';
+    font-weight: 700;
+    text-align: center;
+    height: 100%;
+    vertical-align: center;
 	}
 }
 
@@ -34,9 +23,5 @@
 .config-editor {
 	height: 500px;
 	width: 500px;
-	position: absolute;
-	left: 300px;
-	top: 0px;
-	float: left;
 	border: 1px solid lightgrey;
 }
