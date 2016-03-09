@@ -1,5 +1,8 @@
+const j = require('jquery');
+
 module.exports = function(app) {
   app.directive('dashboard', function() {
+
     return {
       restrict: 'AEC',
       replace: true,
@@ -7,7 +10,11 @@ module.exports = function(app) {
       scope: {
         options: '='
       },
+
       controller: function($scope, Butler, $window, AuthFactory) {
+
+
+
         $scope.configs = [];
         $scope.currentConfig = {};
         $scope.state = {
@@ -42,6 +49,7 @@ module.exports = function(app) {
         };
         /// Load user preferences
         $scope.getConfig = function() {
+
           Butler.getConfig()
             .then(function(res) {
               console.log(res.data);
@@ -50,6 +58,29 @@ module.exports = function(app) {
               console.log(err);
             });
         };
+
+        $scope.onDrop = function(e, data) {
+          var hasAWidget = j(e.target).has('p').length > 0;
+          var id_of_droppable = j(e.target).attr('id');
+          if (hasAWidget && id_of_droppable !== 'widgetBank'){
+            return console.log('already has a widget');
+          } else {
+            console.log($scope.currentConfig.modules);
+            // cache element and add the widget to the box
+            var widget = j('#' + data.id);
+            j(e.target).append(widget);
+            // add the widget to the module at correct position
+            // var index = j(e.target).attr('id');
+            $scope.currentConfig.modules[id_of_droppable] = widget.text();
+            // remove it from the old box and old 
+            // j('#' + data.id).remove();
+
+            console.log($scope.currentConfig.modules);
+
+          }
+        };
+
+
       }
     };
   });
