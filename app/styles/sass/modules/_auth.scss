@@ -1,10 +1,6 @@
 .auth-container {
   @include global-module($color-pri-slate, '');
-  background-image: url('/images/main_logo_auth.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: 100%;
+  @include img-background('/images/main_logo_auth.svg');
 
   .auth-box {
     position: relative;

@@ -1,23 +1,37 @@
 .dashboard-page {
-	height: 100%;
-	width: 100%;
+  height: 100%;
+  background-color: lighten($color-tert-orange, 25%);
 }
 .profile-container {
   @include global-module($color-global-white, $color-pri-slate);
 }
+.nav-container {
+  background-color: $color-tert-orange;
 
-.config-container {
-  @include global-module($color-pri-slate, $color-tert-orange);
-  height: 3em;
+  .config-container {
+    @include global-module($color-pri-slate, $color-tert-orange);
+    height: 3.5em;
 
-	.config-item {
-    font-family: 'Slabo';
-    font-weight: 700;
-    text-align: center;
-    height: 100%;
-    vertical-align: center;
-	}
+    .config-item {
+      font-family: 'Josefin Sans';
+      font-size: 1em;
+      font-weight: 700;
+      text-align: center;
+      height: 100%;
+      margin: 0;
+      padding: 1.2rem 0 0 0;
+      &:hover {
+        background-color: lighten($color-tert-orange, 15%);
+      }
+    }
+  }
 }
+
+.logo-container {
+  @include img-background('/images/main_logo_dashboard.svg')
+  height: 140px;
+}
+
 
 
 .config-editor {

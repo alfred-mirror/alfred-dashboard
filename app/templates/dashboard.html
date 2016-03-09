@@ -1,20 +1,26 @@
 <section data-ng-init="getConfig()" class="dashboard-page row">
 
-	<bdi class="col-md-4">
-		<section class="profile-container col-xs-12">
-			<h1>Greetings, Sir / Madam</h1>
-		</section>
+	<bdi class="nav-container col-md-3">
+		<section class="row">
+			<section class="logo-container col-xs-12">
+				<!-- SVG Logo Container -->
+			</section>
+			<section class="profile-container col-xs-12">
+				<h1>Welcome</h1>
+			</section>
 
-		<section class="col-xs-12">
-			<article class="config-container row middle-xs" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
-				<a data-ng-click="logout()" class="config-item col-xs-6">LOGOUT</a>
-				<a data-ng-click="getConfig()" class="config-item col-xs-6">{{ config.name }}</a>
-			</article>
+			<section class="col-xs-12">
+				<article class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
+					<h3 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h3>
+					<h1 class="profile-container col-xs-12">MIRROR CONFIGS</h1>
+					<h3 data-ng-click="getConfig()" class="config-item col-xs-12">{{ config.name | uppercase }}</h3>
+				</article>
+			</section>
 		</section>
 	</bdi>
 
-	<section data-ng-if="state.editing" class="config-editor col-md-8">
-		{{currentConfig.name}}
+	<section data-ng-if="state.editing" class="config-editor col-md-9">
+		Mirror Config: {{currentConfig.name}}
 		<form data-ng-submit="updateConfig(currentConfig)">
 			<label>First Item</label>
 			<select name="item1" data-ng-model="currentConfig.modules[0]">
