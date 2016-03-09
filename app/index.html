@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Alfred Dashboard</title>
+		<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700|Slabo+27px' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/styles.min.css">
-		<link href='https://fonts.googleapis.com/css?family=Josefin+Sans|Noto+Sans:400,700' rel='stylesheet' type='text/css'>
 		<script src="bundle.js"></script>
 	</head>
 	<body data-ng-app="alfred">
-		<ng-include src="'templates/auth.html'" class="row"></ng-include>
+		<ng-include src="'templates/auth.html'" id="displayContainer" class="row fullscreen"></ng-include>
 		<section data-ng-controller="HomeController">
 			<dashboard data-ng-if="userAuthenticated" class="row fullscreen"></dashboard>
 		</section>
