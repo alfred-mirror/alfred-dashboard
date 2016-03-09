@@ -1,6 +1,7 @@
 @mixin global-module($color, $background: '') {
   @if $background { background-color: $background; }
   color: $color;
+  text-align: center;
   h1, h2, h3 {
     font-family: $type-body, Arial;
     font-weight: 700;
@@ -34,4 +35,24 @@
   &:hover {
     background-color: lighten($background, 25%);
   }
+}
+
+// Sass Color Function
+@function color-pick($color, $child) {
+  @return lighten($color, $child * 6);
+}
+
+@mixin config-colors($color, $child) {
+  background-color: $color;
+  &:hover {
+    background-color: colorpick($color, $child);
+  }
+}
+
+@mixin img-background($filepath) {
+  background-image: url($filepath);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
 }
