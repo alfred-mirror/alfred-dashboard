@@ -20,6 +20,11 @@ gulp.task('html:dev', () => {
     .pipe(gulp.dest(__dirname + '/build'));
 });
 
+gulp.task('images:dev', () => {
+  gulp.src(__dirname + '/app/images/*')
+    .pipe(gulp.dest(__dirname + '/build/images/'));
+});
+
 gulp.task('webpack:dev', () => {
   gulp.src(__dirname + '/app/js/app.js')
     .pipe(webpack({
@@ -31,13 +36,13 @@ gulp.task('webpack:dev', () => {
 });
 
 gulp.task('sass:all', () => {
-  gulp.src(files.sass)
+  gulp.src(__dirname + '/app/styles/sass/manifest.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('styles.min.css'))
     .pipe(gulp.dest(__dirname + '/build/css/'));
 });
 
-gulp.task('build:dev', ['html:dev', 'webpack:dev', 'sass:all']);
+gulp.task('build:dev', ['html:dev', 'images:dev', 'webpack:dev', 'sass:all']);
 
 
 gulp.task('sass:watch', () => {

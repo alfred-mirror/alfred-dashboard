@@ -1,14 +1,13 @@
-<section data-ng-init="getConfig()">
+<section data-ng-init="getConfig()" class="row">
 
-	<section class="config-container">
+	<section class="config-container col-md-3">
 		<button class="message" data-ng-click="logout()">Logout</button>
 		<article class="config-item" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
 			{{config.name}}
-			name
 		</article>
 	</section>
 
-	<section data-ng-if="state.editing" class="config-editor">
+	<section data-ng-if="state.editing" class="config-editor col-md-9">
 	{{currentConfig.name}}
 		<form data-ng-submit="updateConfig(currentConfig)">
 			<label>First Item</label>

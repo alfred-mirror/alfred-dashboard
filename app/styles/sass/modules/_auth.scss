@@ -1,0 +1,34 @@
+.auth-container {
+  @include global-module($color-pri-slate, '');
+
+  .auth-box {
+    position: relative;
+    color: $color-pri-slate;
+    height: 500px;
+    width: 270px;
+    margin: 0 auto;
+    @include form;
+    button {
+      @include btn($color-tert-orange, $color-tert-orange, false);
+    }
+
+    .input {
+      position: relative;
+      width: 90%;
+      color: black;
+      margin-bottom: 30px;
+    }
+
+    .message {
+      font-size: 18px;
+      color: black;
+    }
+  }
+}
+
+#displayContainer {
+  background-image: url('/images/main_logo_auth.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
