@@ -1,0 +1,89 @@
+<section data-ng-init="getConfig()" class="row">
+
+	<section class="config-container col-md-3">
+		<button class="message" data-ng-click="logout()">Logout</button>
+		<article class="config-item" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
+			{{config.name}}
+		</article>
+	</section>
+
+	<section data-ng-if="state.editing" class="config-editor col-md-9">
+	{{currentConfig.name}}
+<!-- 		<form data-ng-submit="updateConfig(currentConfig)">
+			<label>First Item</label>
+			<select name="item1" data-ng-model="currentConfig.modules[0]">
+				<option value="weather" selected>Weather</option>
+				<option value="date">Date</option>
+				<option value="greeting">Greet</option>
+			</select>
+
+
+			<label>Second Item</label>
+			<select name="item1" data-ng-model="currentConfig.modules[1]">
+				<option value="weather" selected>Weather</option>
+				<option value="date">Date</option>
+				<option value="greeting">Greet</option>
+			</select>
+
+
+			<label>Third Item</label>
+			<select name="item1" data-ng-model="currentConfig.modules[2]">
+				<option value="weather" selected>Weather</option>
+				<option value="date">Date</option>
+				<option value="greeting">Greet</option>
+			</select>
+			<input type="submit">
+		</form> -->
+
+
+		<section id="widgetBank" drop-container
+			on-drop="onDrop($event, $dragData)"
+			style="width: 200px; min-height: 300px; border: red solid 1px;">
+			<h3>widget bank</h3>
+				<p drag-container="model"
+				  drag-data="{id: 'weather'}"
+				  id="weather"
+				>weather</p>
+				<p drag-container="model"
+				  drag-data="{id: 'greeting'}"
+				  id="greeting"
+				>greeting</p>
+				<p drag-container="model"
+				  drag-data="{id: 'news'}"
+				  id="news"
+				>news</p>
+				<p drag-container="model"
+				  drag-data="{id: 'time'}"
+				  id="time"
+				>time</p>
+		</section>
+
+		<section ng-model="currentConfig">
+			<article id="0"
+				drop-container 
+				on-drop="onDrop($event, $dragData)"
+				style="width: 100px; height:100px; border: black solid 1px;">
+<!-- 				<p drag-container="model"
+				  drag-data="{id: '{currentConfig.modules[0]}'}"
+				  id={currentConfig.modules[0]}
+				>{currentConfig.modules[0]}</p> -->
+			</article>
+
+			<article id="1"
+				drop-container 
+				on-drop="onDrop($event, $dragData)"
+				style="width: 100px; height:100px; border: black solid 1px;">
+			</article>
+
+			<article id="2"
+				drop-container
+			  on-drop="onDrop($event, $dragData)"
+			  style="width: 100px; height:100px; border: black solid 1px;"
+			></article>
+			
+			<button data-ng-click="updateConfig(currentConfig)">update preferences</button>
+
+		</section>	
+	
+	</section>
+</section>
