@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.factory('Butler', ['$http', '$window',
     function($http, $window) {
-      const baseURI = 'http://localhost:8080/dashboard/preferences';
+      const baseURI = BASE_URI + '/dashboard/preferences';
 
       return {
         // Load User Preferences

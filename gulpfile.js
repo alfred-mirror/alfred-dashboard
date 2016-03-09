@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const sass = require('gulp-sass');
+const webpackEnv = require('webpack-env');
 const webpack = require('webpack-stream');
 const concat = require('gulp-concat');
 
@@ -30,7 +31,8 @@ gulp.task('webpack:dev', () => {
     .pipe(webpack({
       output: {
         filename: 'bundle.js'
-      }
+      },
+      plugins: [webpackEnv]
     }))
     .pipe(gulp.dest(__dirname + '/build/'));
 });

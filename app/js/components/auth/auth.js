@@ -33,8 +33,7 @@ module.exports = function(app) {
             $window.sessionStorage._id = res.data.user._id;
             // Broadcast event and user ID
             EE.emit('USER_AUTHENTICATED', res.data.user._id);
-            // Remove fullscreen class (auth to dashboard transition)
-            document.getElementById('displayContainer').className = 'row';
+          
           } else {
             // Alert no user
             $rootScope.loginMessage = 'No User Found.';

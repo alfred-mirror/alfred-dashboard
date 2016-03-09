@@ -1,3 +1,9 @@
 const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-express().use(express.static(__dirname + '/build')).listen(3000, () => console.log('PORT 3000'));
+app.use(express.static('build'));
+
+app.listen(PORT, () => {
+  console.log('Server up on port ' + PORT);
+})
