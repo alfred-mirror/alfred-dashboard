@@ -1,6 +1,7 @@
 var angular = require('angular');
+require('angular-route')
 
-var alfred = angular.module('alfred', []);
+var alfred = angular.module('alfred', ['ngRoute']);
 
 // Require Services
 require('./services/services-index.js')(alfred);
@@ -15,10 +16,26 @@ alfred
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .run(function($window, EE, $rootScope) {
+  .config(['$routeProvider', '$locationProvider', 
+    function(routeProvider, locationProvider){
+      routeProvider
+      .when('/', {
+        templateUrl: 'templates/auth.html'
+      })
+      .when('/dashboard', {
+        template: '<dashboard></dashboard>',
+        controller:'HomeController'
+      })
+    }])
+
+  .run(function($window, EE, $rootScope, $location) {
     if ($window.sessionStorage.token && $window.sessionStorage._id) {
       $rootScope.authenticated = true;
     }
+
+    $rootScope.$on('USER_AUTHENTICATED', function() {
+      $location.path('/dashboard');
+    })
   })
 
   .controller('HomeController', ['$scope',

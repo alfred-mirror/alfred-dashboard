@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.factory('Butler', ['$http', '$window',
     function($http, $window) {
-      const baseURI = 'https://alfred-backend.herokuapp.com/dashboard/preferences';
+      const baseURI = BASE_URI + '/dashboard/preferences';
 
       return {
         // Load User Preferences

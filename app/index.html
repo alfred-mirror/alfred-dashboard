@@ -8,9 +8,6 @@
 		<script src="bundle.js"></script>
 	</head>
 	<body data-ng-app="alfred">
-		<ng-include src="'templates/auth.html'" id="displayContainer" class="row fullscreen"></ng-include>
-		<section data-ng-controller="HomeController">
-			<dashboard data-ng-if="userAuthenticated" class="row fullscreen"></dashboard>
-		</section>
+		<div ng-view></div>
 	</body>
 </html>

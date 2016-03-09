@@ -2,7 +2,7 @@
 module.exports = function(app) {
   app.factory('AuthFactory', ['$http', '$window',
     function($http, $window) {
-      const baseURI = 'https://alfred-backend.herokuapp.com/auth';
+      const baseURI = BASE_URI + '/auth';
       return {
         login: function(data) {
           var headerData = data.email + ':' + data.password;

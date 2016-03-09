@@ -3,13 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Alfred Dashboard</title>
+		<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700|Slabo+27px' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/styles.min.css">
 		<script src="bundle.js"></script>
 	</head>
 	<body data-ng-app="alfred">
-		<ng-include src="'templates/auth.html'"></ng-include>
-		<section data-ng-controller="HomeController">
-			<dashboard data-ng-if="userAuthenticated"></dashboard>
-		</section>
+		<div ng-view></div>
 	</body>
 </html>
