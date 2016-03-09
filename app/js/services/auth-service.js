@@ -34,6 +34,7 @@ module.exports = function(app) {
 
         logout: function() {
           delete $window.sessionStorage.token;
+          document.location.reload(true);
         }
       };
     }
