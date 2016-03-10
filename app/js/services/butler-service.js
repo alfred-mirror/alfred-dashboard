@@ -11,6 +11,10 @@ module.exports = function(app) {
         updateConfig: function(config) {
           var URI = baseURI + '/' + config._id;
           return $http.put(URI, config);
+        },
+        setConfig: function(config) {
+          var URI = baseURI + '/setConfig/' + config._id;
+          return $http.post(URI);
         }
       };
     }

@@ -1,4 +1,4 @@
-// const j = require('jquery');
+const j = require('jquery');
 
 module.exports = function(app) {
   app.directive('dashboard', function() {
@@ -34,6 +34,16 @@ module.exports = function(app) {
               console.log(err);
             });
         };
+        // Set config
+        $scope.setConfig = function(config) {
+          Butler.setConfig(config)
+            .then(function(res) {
+              console.log('config set!');
+              console.log(res.data);
+            }, function(err) {
+              console.log(err);
+            });
+        }
         // Edit Config File
         $scope.editConfig = function(config) {
           $scope.currentConfig = config;
@@ -73,6 +83,7 @@ module.exports = function(app) {
           var id_of_droppable = j(e.target).attr('id');
           var id_of_draggable = j('#' + data.id).parent().attr('id');
 
+          // scenario: trying to overload a pref
           if (hasAWidget && id_of_droppable !== 'widgetBank'){
             return console.log('already has a widget');
           }
@@ -83,7 +94,7 @@ module.exports = function(app) {
 
           // check if we're dropping into the bank
           if (id_of_droppable === 'widgetBank') {
-            // from the bank to the bank
+            // scenario: bank to bank
             if (id_of_droppable == id_of_draggable) {
               return;
             }
@@ -93,8 +104,8 @@ module.exports = function(app) {
 
           // add the widget to the module at correct position
           $scope.currentConfig.modules[id_of_droppable] = widget.text();
-          // if the what the widget came from is widgetBank then go back
-          // before making the index undifined in the modules array
+
+          // scenario: bank to prefs
           if (id_of_draggable === 'widgetBank') {
             return;
           }
