@@ -34,6 +34,13 @@ module.exports = function(app) {
               console.log(err);
             });
         };
+        // Update user
+        $scope.updateUser = function(user) {
+          Butler.updateUser(user).then(function(res) {
+            console.log(res);
+          });
+        }
+        
         // Set config
         $scope.setConfig = function(config) {
           Butler.setConfig(config)

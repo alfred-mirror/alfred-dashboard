@@ -37,22 +37,46 @@ gulp.task('webpack:dev', () => {
     .pipe(gulp.dest(__dirname + '/build/'));
 });
 
-gulp.task('sass:all', () => {
+gulp.task('sass:dev', () => {
   gulp.src(__dirname + '/app/styles/sass/manifest.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('styles.min.css'))
     .pipe(gulp.dest(__dirname + '/build/css/'));
 });
 
-gulp.task('build:dev', ['html:dev', 'images:dev', 'webpack:dev', 'sass:all']);
+gulp.task('build:dev', ['html:dev', 'images:dev', 'webpack:dev', 'sass:dev']);
 
 
 gulp.task('sass:watch', () => {
-  gulp.watch(files.sass, ['sass:all']);
+  gulp.watch(files.sass, ['sass:dev']);
 });
 
 gulp.task('dev:watch', () => {
   gulp.watch(files.all, ['webpack:dev', 'html:dev']);
 });
+
+
+gulp.task('webpack:test', () => {
+  gulp.src(__dirname + '/test/test_entry.js')
+    .pipe(webpack({
+      module: {
+        loaders: [
+          {
+            test: /\.html$/,
+            loader: 'html'
+          }
+        ]
+      },
+      htmlLoader: {
+        ignoreCustomFragments: [/\{\{.*?}}/]
+      },
+      output: {
+        filename: 'test_bundle.js'
+      },
+      plugins: [webpackEnv]
+    }))
+    .pipe(gulp.dest('test/'));
+});
+
 
 gulp.task('default', ['dev:watch', 'sass:watch']);
