@@ -1,5 +1,5 @@
 var angular = require('angular');
-require('angular-route')
+require('angular-route');
 
 var alfred = angular.module('alfred', [require('angular-drag-drop'), 'ngRoute']);
 
@@ -16,7 +16,7 @@ alfred
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .config(['$routeProvider', '$locationProvider', 
+  .config(['$routeProvider', '$locationProvider',
     function(routeProvider, locationProvider){
       routeProvider
       .when('/', {
@@ -25,7 +25,7 @@ alfred
       .when('/dashboard', {
         template: '<dashboard></dashboard>',
         controller:'HomeController'
-      })
+      });
     }])
 
   .run(function($window, EE, $rootScope, $location) {
@@ -35,7 +35,7 @@ alfred
 
     $rootScope.$on('USER_AUTHENTICATED', function() {
       $location.path('/dashboard');
-    })
+    });
   })
 
   .controller('HomeController', ['$scope',

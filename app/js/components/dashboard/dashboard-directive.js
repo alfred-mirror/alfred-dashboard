@@ -1,4 +1,4 @@
-const j = require('jquery');
+// const j = require('jquery');
 
 module.exports = function(app) {
   app.directive('dashboard', function() {
@@ -56,6 +56,16 @@ module.exports = function(app) {
         };
         $scope.getLocation = function() {
           GeoLocation.getLocation();
+        };
+
+        $scope.geocoding = function() {
+          GeoLocation.geocoding()
+            .then(function(res) {
+              console.log('lat ' + res.data.results[0].locations[0].latLng.lat);
+              console.log('lng ' + res.data.results[0].locations[0].latLng.lng);
+            }, function(err) {
+              console.log(err);
+            });
         };
 
         $scope.onDrop = function(e, data) {
