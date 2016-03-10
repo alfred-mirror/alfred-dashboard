@@ -3,12 +3,19 @@ module.exports = function(app) {
     function($http, $window) {
       return {
         getLocation: function() {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude;
-            var long = position.coords.longitude;
-            var location = lat + ', ' + long;
-            console.log(location);
-            return location;
+          // navigator.geolocation.getCurrentPosition(function(position) {
+          //   var lat = position.coords.latitude;
+          //   var long = position.coords.longitude;
+          //   var location = lat + ', ' + long;
+          //   console.log(location);
+          //   return location;
+          // });
+          return new Promise(function(resolve) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              var location = position.coords;
+              console.log(location.latitude + ', ' + location.longitude);
+              resolve(location);
+            });
           });
         },
         // TODO: link variables to .env inputs
