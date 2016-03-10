@@ -44,6 +44,10 @@ module.exports = function(app) {
               console.log(err);
             });
         }
+        // $scope.configsToggle() = function() {
+        //
+        // }
+
         // Edit Config File
         $scope.editConfig = function(config) {
           $scope.currentConfig = config;

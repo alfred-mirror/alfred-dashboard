@@ -32528,8 +32528,13 @@
 	        },
 	        // TODO: link variables to .env inputs
 	        geocoding: function() {
+<<<<<<< 9d100109487a4c97bbd3c07b9e55fcab714d8171
 	          var address = 'ADDRESS';
 	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
+=======
+	          var address = ADDRESS;
+	          var key = MAPQUEST_KEY;
+>>>>>>> More styling to the dashboard, almost done working out layout kinks.
 	          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
 	          console.log(locationURI);
 	          return $http.get(locationURI);
