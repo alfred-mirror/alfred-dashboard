@@ -52,9 +52,9 @@
 	// Require Services
 	__webpack_require__(5)(alfred);
 	// Require Auth
-	__webpack_require__(10)(alfred);
+	__webpack_require__(11)(alfred);
 	// Require Dashboard
-	__webpack_require__(12)(alfred);
+	__webpack_require__(13)(alfred);
 
 	// Add Token Middleware
 	alfred
@@ -31575,6 +31575,7 @@
 	  __webpack_require__(7)(app);
 	  __webpack_require__(8)(app);
 	  __webpack_require__(9)(app);
+	  __webpack_require__(10)(app);
 	};
 
 
@@ -31679,7 +31680,7 @@
 	module.exports = function(app) {
 	  app.factory('Butler', ['$http', '$window',
 	    function($http, $window) {
-	      const baseURI = ("http://localhost:8080") + '/dashboard/preferences';
+	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
 
 	      return {
 	        // Load User Preferences
@@ -31698,15 +31699,38 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports = function(app){
-	  __webpack_require__(11)(app);
+	module.exports = function(app) {
+	  app.factory('GeoLocation', ['$http', '$window',
+	    function($http, $window) {
+	      return {
+	        getLocation: function() {
+	          navigator.geolocation.getCurrentPosition(function(position) {
+	            var lat = position.coords.latitude;
+	            var long = position.coords.longitude;
+	            var location = lat + ', ' + long;
+	            console.log(location);
+	            return location;
+	          });
+	        }
+	      };
+	    }
+	  ]);
 	};
 
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app){
+	  __webpack_require__(12)(app);
+	};
+
+
+/***/ },
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
@@ -31786,16 +31810,16 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-	  __webpack_require__(13)(app);
+	  __webpack_require__(14)(app);
 	};
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
@@ -31807,7 +31831,7 @@
 	      scope: {
 	        options: '='
 	      },
-	      controller: function($scope, Butler, $window, AuthFactory) {
+	      controller: function($scope, Butler, $window, AuthFactory, GeoLocation) {
 	        $scope.configs = [];
 	        $scope.currentConfig = {};
 	        $scope.state = {
@@ -31850,10 +31874,14 @@
 	              console.log(err);
 	            });
 	        };
+	        $scope.getLocation = function() {
+	          GeoLocation.getLocation();
+	        };
 	      }
 	    };
 	  });
 	};
+
 
 /***/ }
 /******/ ]);

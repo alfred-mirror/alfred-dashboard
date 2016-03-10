@@ -7,7 +7,7 @@ module.exports = function(app) {
       scope: {
         options: '='
       },
-      controller: function($scope, Butler, $window, AuthFactory) {
+      controller: function($scope, Butler, $window, AuthFactory, GeoLocation) {
         $scope.configs = [];
         $scope.currentConfig = {};
         $scope.state = {
@@ -49,6 +49,9 @@ module.exports = function(app) {
             }, function(err) {
               console.log(err);
             });
+        };
+        $scope.getLocation = function() {
+          GeoLocation.getLocation();
         };
       }
     };
