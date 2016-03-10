@@ -32437,14 +32437,15 @@
 	  ]);
 	};
 
+
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Handles Token Retrevial and Creation
 	module.exports = function(app) {
-	  app.factory('AuthFactory', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('AuthFactory', ['$http', '$window', '$location',
+	    function($http, $window, $location) {
 	      const baseURI = ("http://localhost:8080") + '/auth';
 	      return {
 	        login: function(data) {
@@ -32477,7 +32478,8 @@
 
 	        logout: function() {
 	          delete $window.sessionStorage.token;
-	          document.location.reload(true);
+	          delete $window.sessionStorage._id;
+	          $location.path('/');
 	        }
 	      };
 	    }
@@ -32489,9 +32491,11 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* global BASE_URI */
+
 	module.exports = function(app) {
-	  app.factory('Butler', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('Butler', ['$http',
+	    function($http) {
 	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
 
 	      return {
@@ -32525,32 +32529,32 @@
 /* 11 */
 /***/ function(module, exports) {
 
+	/* global MAPQUEST_KEY */
 	module.exports = function(app) {
-	  app.factory('GeoLocation', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('GeoLocation', ['$http',
+	    function($http) {
 	      return {
 	        getLocation: function() {
-	          navigator.geolocation.getCurrentPosition(function(position) {
-	            var lat = position.coords.latitude;
-	            var long = position.coords.longitude;
-	            var location = lat + ', ' + long;
-	            console.log(location);
-	            return location;
+	          // navigator.geolocation.getCurrentPosition(function(position) {
+	          //   var lat = position.coords.latitude;
+	          //   var long = position.coords.longitude;
+	          //   var location = lat + ', ' + long;
+	          //   console.log(location);
+	          //   return location;
+	          // });
+
+	          return new Promise(function(resolve) {
+	            navigator.geolocation.getCurrentPosition(function(position) {
+	              var location = position.coords;
+	              console.log(location.latitude + ', ' + location.longitude);
+	              resolve(location);
+	            });
 	          });
 	        },
 	        // TODO: link variables to .env inputs
 	        geocoding: function() {
-<<<<<<< 045435689111369a115a43851197e740870c3bf5
-<<<<<<< e8ebf3aadd3034d0bfe5c501ff598135632e7f91
-=======
-<<<<<<< 9d100109487a4c97bbd3c07b9e55fcab714d8171
->>>>>>> More styling to the dashboard, almost done working out layout kinks.
 	          var address = 'ADDRESS';
 	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
-=======
-	          var address = ADDRESS;
-	          var key = MAPQUEST_KEY;
->>>>>>> More styling to the dashboard, almost done working out layout kinks.
 	          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
 	          console.log(locationURI);
 	          return $http.get(locationURI);
@@ -32710,7 +32714,7 @@
 	            console.log(res);
 	          });
 	        }
-	        
+
 	        // Set config
 	        $scope.setConfig = function(config) {
 	          Butler.setConfig(config)
@@ -32721,6 +32725,7 @@
 	              console.log(err);
 	            });
 	        }
+
 	        // Edit Config File
 	        $scope.editConfig = function(config) {
 	          $scope.currentConfig = config;
@@ -42633,7 +42638,6 @@
 	}));
 
 
-<<<<<<< e8ebf3aadd3034d0bfe5c501ff598135632e7f91
 /***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
@@ -42681,7 +42685,5 @@
 	  });
 	}
 
-=======
->>>>>>> More styling to the dashboard, almost done working out layout kinks.
 /***/ }
 /******/ ]);
