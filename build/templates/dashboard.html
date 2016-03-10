@@ -9,8 +9,8 @@
 				<h1>Welcome</h1>
 			</section>
 
-			<section class="col-xs-12">
-				<article class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
+			<section data-ng-init="getLocation()" class="col-xs-12">
+				<article data-ng-init="geocoding()" class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
 					<h3 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h3>
 					<h1 class="profile-container col-xs-12">MIRROR CONFIGS</h1>
 					<h3 data-ng-click="getConfig()" class="config-item col-xs-12">{{ config.name | uppercase }}</h3>

@@ -21,9 +21,20 @@
     "IoT",
     "Alfred",
     "AI",
-    "mirror"
+    "mirror",
+    "smart mirror",
+    "magic mirror",
+    "magic",
+    "smart",
+    "Electron"
   ],
-  "author": "samheutmaker@gmail.com, jamesvermillion@yahoo.com, cychownat@gmail.com",
+  "author": [
+    { "name": "Natalie Chow", "email": "cychownat@gmail.com" },
+    { "name": "Sam Heutmaker", "email": "samheutmaker@gmail.com" },
+    { "name": "Sabrina Tee", "email": "sabrinatee@me.com" },
+    { "name": "Jose Tello", "email": "josectello@gmail.com" },
+    { "name": "James Vermillion", "email": "jamesvermillion@yahoo.com" }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/alfred-mirror/alfred-dashboard/issues"
