@@ -30,7 +30,10 @@
   },
   "homepage": "https://github.com/alfred-mirror/alfred-dashboard#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "angular-drag-drop": "^2.0.5",
+    "express": "^4.13.4",
+    "jquery": "^2.2.1",
+    "jquery-ui": "^1.10.5"
   },
   "devDependencies": {
     "angular": "^1.5.0",
