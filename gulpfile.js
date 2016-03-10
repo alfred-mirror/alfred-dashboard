@@ -55,7 +55,6 @@ gulp.task('dev:watch', () => {
   gulp.watch(files.all, ['webpack:dev', 'html:dev']);
 });
 
-
 gulp.task('webpack:test', () => {
   gulp.src(__dirname + '/test/test_entry.js')
     .pipe(webpack({
@@ -77,6 +76,5 @@ gulp.task('webpack:test', () => {
     }))
     .pipe(gulp.dest('test/'));
 });
-
 
 gulp.task('default', ['dev:watch', 'sass:watch']);

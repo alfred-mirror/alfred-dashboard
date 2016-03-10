@@ -1,6 +1,7 @@
+/* global MAPQUEST_KEY */
 module.exports = function(app) {
-  app.factory('GeoLocation', ['$http', '$window',
-    function($http, $window) {
+  app.factory('GeoLocation', ['$http',
+    function($http) {
       return {
         getLocation: function() {
           // navigator.geolocation.getCurrentPosition(function(position) {
@@ -10,6 +11,7 @@ module.exports = function(app) {
           //   console.log(location);
           //   return location;
           // });
+
           return new Promise(function(resolve) {
             navigator.geolocation.getCurrentPosition(function(position) {
               var location = position.coords;
