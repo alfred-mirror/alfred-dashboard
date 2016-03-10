@@ -57,8 +57,12 @@
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^2.0.0",
     "gulp-sass": "^2.2.0",
+    "html-loader": "^0.4.3",
     "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
     "karma": "^0.13.21",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.7",
     "webpack": "^1.12.13",
     "webpack-env": "^0.8.0",
     "webpack-stream": "^3.1.0"
