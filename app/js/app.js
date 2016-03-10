@@ -1,7 +1,7 @@
 var angular = require('angular');
 require('angular-route')
 
-var alfred = angular.module('alfred', ['ngRoute']);
+var alfred = angular.module('alfred', [require('angular-drag-drop'), 'ngRoute']);
 
 // Require Services
 require('./services/services-index.js')(alfred);

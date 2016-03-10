@@ -31,11 +31,12 @@
   @include img-background('/images/main_logo_dashboard.svg')
   height: 140px;
 }
-
-
-
 .config-editor {
-	height: 500px;
-	width: 500px;
-	border: 1px solid lightgrey;
+
+  #widgetBank {
+    @include global-module($color-global-white, $color-pri-slate);
+    #weather, #greeting, #news, #time, #commute {
+      padding: 1.5em 0;
+    }
+  }
 }

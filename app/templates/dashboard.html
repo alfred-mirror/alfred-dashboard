@@ -19,7 +19,7 @@
 		</section>
 	</bdi>
 
-	<section data-ng-if="state.editing" class="config-editor col-md-9">
+<!-- 	<section data-ng-if="state.editing" class="config-editor col-md-9">
 		Mirror Config: {{currentConfig.name}}
 		<form data-ng-submit="updateConfig(currentConfig)">
 			<label>First Item</label>
@@ -42,5 +42,91 @@
 			</select>
 			<input type="submit">
 		</form>
+	</section> -->
+
+	<!-- <bdi data-ng-if="state.editing"> -->
+
+		<section data-ng-if="state.editing" class="config-editor col-md-2">
+			<bdi class="row">
+				<section id="widgetBank" drop-container
+				on-drop="onDrop($event, $dragData)"
+				class="col-xs-12">
+				<h3>WIDGET BANK</h3>
+				<section class="row">
+					<p drag-container="model"
+					drag-data="{id: 'weather'}"
+					id="weather"
+					class="col-xs-12"
+					>weather</p>
+					<p drag-container="model"
+					drag-data="{id: 'greeting'}"
+					id="greeting"
+					class="col-xs-12"
+					>greeting</p>
+					<p drag-container="model"
+					drag-data="{id: 'news'}"
+					id="news"
+					class="col-xs-12"
+					>news</p>
+					<p drag-container="model"
+					drag-data="{id: 'time'}"
+					id="time"
+					class="col-xs-12"
+					>time</p>
+					<p drag-container="model"
+					drag-data="{id: 'commute' }"
+					id="commute"
+					class="col-xs-12"
+					>commute</p>
+				</section>
+			</section>
+		</bdi>
 	</section>
+
+	<section ng-model="currentConfig" class="col-md-7">
+		<section class="row">
+			<bdi class="col-xs-12">
+				<section class="row">
+					<article id="0"
+					drop-container
+					on-drop="onDrop($event, $dragData)"
+					class="col-xs-2"
+					style="width: 100px; height:100px; border: black solid 1px;">
+					</article>
+
+					<article id="1"
+					drop-container
+					on-drop="onDrop($event, $dragData)"
+					class="col-xs-2"
+					style="width: 100px; height:100px; border: black solid 1px;"
+					></article>
+
+					<article id="2"
+					drop-container
+					on-drop="onDrop($event, $dragData)"
+					class="col-xs-2"
+					style="width: 100px; height:100px; border: black solid 1px;">
+					</article>
+
+					<article id="3"
+					drop-container
+					on-drop="onDrop($event, $dragData)"
+					class="col-xs-2"
+					style="width: 100px; height:100px; border: black solid 1px;"
+					></article>
+
+					<article id="4"
+					drop-container
+					on-drop="onDrop($event, $dragData)"
+					class="col-xs-2"
+					style="width: 100px; height:100px; border: black solid 1px;"
+					></article>
+
+					<button data-ng-click="updateConfig(currentConfig)">update preferences</button>
+				</section>
+			</bdi>
+		</section>
+	<!-- </bdi> -->
+	</section>
+
 </section>
