@@ -32491,10 +32491,15 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 	
+=======
+	/* global BASE_URI */
+
+>>>>>>> 30ef7bbcbbd5908fd36884d86b0c03e7b3749cdb
 	module.exports = function(app) {
-	  app.factory('Butler', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('Butler', ['$http',
+	    function($http) {
 	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
 
 	      return {
@@ -32528,10 +32533,14 @@
 /* 11 */
 /***/ function(module, exports) {
 
+<<<<<<< HEAD
 	
+=======
+	/* global MAPQUEST_KEY */
+>>>>>>> 30ef7bbcbbd5908fd36884d86b0c03e7b3749cdb
 	module.exports = function(app) {
-	  app.factory('GeoLocation', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('GeoLocation', ['$http',
+	    function($http) {
 	      return {
 	        getLocation: function() {
 	          // navigator.geolocation.getCurrentPosition(function(position) {
@@ -32541,6 +32550,10 @@
 	          //   console.log(location);
 	          //   return location;
 	          // });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 30ef7bbcbbd5908fd36884d86b0c03e7b3749cdb
 	          return new Promise(function(resolve) {
 	            navigator.geolocation.getCurrentPosition(function(position) {
 	              var location = position.coords;
@@ -32712,7 +32725,7 @@
 	            console.log(res);
 	          });
 	        }
-	        
+
 	        // Set config
 	        $scope.setConfig = function(config) {
 	          Butler.setConfig(config)
@@ -32723,9 +32736,12 @@
 	              console.log(err);
 	            });
 	        }
+<<<<<<< HEAD
 	        // $scope.configsToggle() = function() {
 	        //
 	        // }
+=======
+>>>>>>> 30ef7bbcbbd5908fd36884d86b0c03e7b3749cdb
 
 	        // Edit Config File
 	        $scope.editConfig = function(config) {

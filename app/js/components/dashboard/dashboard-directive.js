@@ -40,7 +40,7 @@ module.exports = function(app) {
             console.log(res);
           });
         }
-        
+
         // Set config
         $scope.setConfig = function(config) {
           Butler.setConfig(config)
@@ -51,9 +51,6 @@ module.exports = function(app) {
               console.log(err);
             });
         }
-        // $scope.configsToggle() = function() {
-        //
-        // }
 
         // Edit Config File
         $scope.editConfig = function(config) {
