@@ -17,6 +17,14 @@ module.exports = function(app) {
         setConfig: function(config) {
           var URI = baseURI + '/setConfig/' + config._id;
           return $http.post(URI);
+        },
+        getUser: function() {
+          var URI = BASE_URI + '/user/' + $window.sessionStorage._id;
+          return $http.get(URI);
+        },
+        updateUser: function(user) {
+          var URI = BASE_URI + '/user/update/' + $window.sessionStorage._id;
+          return $http.put(URI, user);
         }
       };
     }
