@@ -28,10 +28,6 @@ alfred
         template: '<dashboard></dashboard>',
         controller: 'HomeController'
       })
-      .when('/user', {
-        template: '<user></user>',
-        controller: 'HomeController'
-      });
   }
 ])
 
