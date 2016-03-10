@@ -32491,11 +32491,10 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* global BASE_URI */
-
+	
 	module.exports = function(app) {
-	  app.factory('Butler', ['$http',
-	    function($http) {
+	  app.factory('Butler', ['$http', '$window',
+	    function($http, $window) {
 	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
 
 	      return {
@@ -32529,10 +32528,10 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	/* global MAPQUEST_KEY */
+	
 	module.exports = function(app) {
-	  app.factory('GeoLocation', ['$http',
-	    function($http) {
+	  app.factory('GeoLocation', ['$http', '$window',
+	    function($http, $window) {
 	      return {
 	        getLocation: function() {
 	          // navigator.geolocation.getCurrentPosition(function(position) {
