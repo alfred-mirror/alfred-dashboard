@@ -23,19 +23,23 @@ module.exports = function(app) {
     function($scope, $location, $window, EE, AuthFactory, $rootScope) {
       // Login function
       $scope.login = function(loginModel) {
+        console.log('login called');
+        console.log(loginModel);
         // Call login function from Auth Factory
         AuthFactory.login(loginModel).then(function(res) {
           // Check for token
           if (res.data.token) {
             // Save token
+            console.log(res.data.token);
             $window.sessionStorage.token = res.data.token;
             // Save user ID
             $window.sessionStorage._id = res.data.user._id;
             // Broadcast event and user ID
             EE.emit('USER_AUTHENTICATED', res.data.user._id);
-          
+
           } else {
             // Alert no user
+            console.log('else block');
             $rootScope.loginMessage = 'No User Found.';
           }
           // Check for error
@@ -51,6 +55,7 @@ module.exports = function(app) {
     function($scope, $location, $window, EE, AuthFactory, $rootScope) {
       // Login function
       $scope.register = function(registerModel) {
+        console.log('inside $scope.register function');
         AuthFactory.register(registerModel).then(function(res) {
           if (res.data.token) {
             // Save token
