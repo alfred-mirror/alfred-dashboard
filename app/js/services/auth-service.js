@@ -1,7 +1,7 @@
 // Handles Token Retrevial and Creation
 module.exports = function(app) {
-  app.factory('AuthFactory', ['$http', '$window',
-    function($http, $window) {
+  app.factory('AuthFactory', ['$http', '$window', '$location',
+    function($http, $window, $location) {
       const baseURI = BASE_URI + '/auth';
       return {
         login: function(data) {
@@ -34,7 +34,8 @@ module.exports = function(app) {
 
         logout: function() {
           delete $window.sessionStorage.token;
-          document.location.reload(true);
+          delete $window.sessionStorage._id;
+          $location.path('/');
         }
       };
     }

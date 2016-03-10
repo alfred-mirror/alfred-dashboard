@@ -1,6 +1,8 @@
+/* global BASE_URI */
+
 module.exports = function(app) {
-  app.factory('Butler', ['$http', '$window',
-    function($http, $window) {
+  app.factory('Butler', ['$http',
+    function($http) {
       const baseURI = BASE_URI + '/dashboard/config';
 
       return {
