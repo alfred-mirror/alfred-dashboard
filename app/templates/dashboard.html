@@ -1,7 +1,10 @@
-<section data-ng-init="getConfig()" class="row">
-
-	<section class="config-container col-md-3">
+<section data-ng-init="getConfig()" class="dashboard-page">
+	<section class="profile-container">
+		Profile
 		<button class="message" data-ng-click="logout()">Logout</button>
+	</section>
+	<section class="config-container">
+		
 		<article class="config-item" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
 			{{config.name}}
 		</article>
@@ -10,22 +13,23 @@
 	<section data-ng-if="state.editing" class="config-editor col-md-9">
 	{{currentConfig.name}}
 <!-- 		<form data-ng-submit="updateConfig(currentConfig)">
+=======
+	<section data-ng-if="state.editing" class="config-editor">
+		{{currentConfig.name}}
+		<form data-ng-submit="updateConfig(currentConfig)">
+>>>>>>> 9bc975d62ed08b719b482acd138e7113296fd9d6
 			<label>First Item</label>
 			<select name="item1" data-ng-model="currentConfig.modules[0]">
 				<option value="weather" selected>Weather</option>
 				<option value="date">Date</option>
 				<option value="greeting">Greet</option>
 			</select>
-
-
 			<label>Second Item</label>
 			<select name="item1" data-ng-model="currentConfig.modules[1]">
 				<option value="weather" selected>Weather</option>
 				<option value="date">Date</option>
 				<option value="greeting">Greet</option>
 			</select>
-
-
 			<label>Third Item</label>
 			<select name="item1" data-ng-model="currentConfig.modules[2]">
 				<option value="weather" selected>Weather</option>
@@ -56,6 +60,10 @@
 				  drag-data="{id: 'time'}"
 				  id="time"
 				>time</p>
+				<p drag-container="model"
+				  drag-data="{id: 'commute' }"
+				  id="commute"
+				>commute</p>
 		</section>
 
 		<section ng-model="currentConfig">
@@ -63,19 +71,33 @@
 				drop-container 
 				on-drop="onDrop($event, $dragData)"
 				style="width: 100px; height:100px; border: black solid 1px;">
-<!-- 				<p drag-container="model"
-				  drag-data="{id: '{currentConfig.modules[0]}'}"
-				  id={currentConfig.modules[0]}
-				>{currentConfig.modules[0]}</p> -->
 			</article>
 
-			<article id="1"
+			<article id="0"
 				drop-container 
 				on-drop="onDrop($event, $dragData)"
 				style="width: 100px; height:100px; border: black solid 1px;">
 			</article>
 
+			<article id="1"
+				drop-container
+			  on-drop="onDrop($event, $dragData)"
+			  style="width: 100px; height:100px; border: black solid 1px;"
+			></article>
+			
 			<article id="2"
+				drop-container 
+				on-drop="onDrop($event, $dragData)"
+				style="width: 100px; height:100px; border: black solid 1px;">
+			</article>
+
+			<article id="3"
+				drop-container
+			  on-drop="onDrop($event, $dragData)"
+			  style="width: 100px; height:100px; border: black solid 1px;"
+			></article>
+
+			<article id="4"
 				drop-container
 			  on-drop="onDrop($event, $dragData)"
 			  style="width: 100px; height:100px; border: black solid 1px;"

@@ -13,8 +13,6 @@ module.exports = function(app) {
 
       controller: function($scope, Butler, $window, AuthFactory) {
 
-
-
         $scope.configs = [];
         $scope.currentConfig = {};
         $scope.state = {
@@ -62,25 +60,37 @@ module.exports = function(app) {
         $scope.onDrop = function(e, data) {
           var hasAWidget = j(e.target).has('p').length > 0;
           var id_of_droppable = j(e.target).attr('id');
+          var id_of_draggable = j('#' + data.id).parent().attr('id');
+
           if (hasAWidget && id_of_droppable !== 'widgetBank'){
             return console.log('already has a widget');
-          } else {
-            console.log($scope.currentConfig.modules);
-            // cache element and add the widget to the box
-            var widget = j('#' + data.id);
-            j(e.target).append(widget);
-            // add the widget to the module at correct position
-            // var index = j(e.target).attr('id');
-            $scope.currentConfig.modules[id_of_droppable] = widget.text();
-            // remove it from the old box and old 
-            // j('#' + data.id).remove();
+          } 
 
-            console.log($scope.currentConfig.modules);
+          // cache element and add the widget to the box
+          var widget = j('#' + data.id);
+          j(e.target).append(widget);
 
+          // check if we're dropping into the bank
+          if (id_of_droppable === 'widgetBank') {
+            // from the bank to the bank
+            if (id_of_droppable == id_of_draggable) {
+              return;
+            }
+            $scope.currentConfig.modules[id_of_draggable] = undefined;
+            return;
           }
+
+          // add the widget to the module at correct position
+          $scope.currentConfig.modules[id_of_droppable] = widget.text();
+          // if the what the widget came from is widgetBank then go back 
+          // before making the index undifined in the modules array
+          if (id_of_draggable === 'widgetBank') {
+            return;
+          }
+          
+          // remove it from the modules index 
+          $scope.currentConfig.modules[id_of_draggable] = undefined;
         };
-
-
       }
     };
   });
