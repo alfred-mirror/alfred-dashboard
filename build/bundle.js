@@ -55,6 +55,8 @@
 	__webpack_require__(12)(alfred);
 	// Require Dashboard
 	__webpack_require__(14)(alfred);
+	// Require User 
+	__webpack_require__(17)(alfred);
 
 	// Add Token Middleware
 	alfred
@@ -62,38 +64,42 @@
 	    $httpProvider.interceptors.push('authInterceptor');
 	  })
 
-	  .config(['$routeProvider', '$locationProvider',
-	    function(routeProvider, locationProvider){
-	      routeProvider
+	.config(['$routeProvider', '$locationProvider',
+	  function(routeProvider, locationProvider) {
+	    routeProvider
 	      .when('/', {
 	        templateUrl: 'templates/auth.html'
 	      })
 	      .when('/dashboard', {
 	        template: '<dashboard></dashboard>',
-	        controller:'HomeController'
+	        controller: 'HomeController'
+	      })
+	      .when('/user', {
+	        template: '<user></user>',
+	        controller: 'HomeController'
 	      });
-	    }])
+	  }
+	])
 
-	  .run(function($window, EE, $rootScope, $location) {
-	    if ($window.sessionStorage.token && $window.sessionStorage._id) {
-	      $rootScope.authenticated = true;
-	    }
+	.run(function($window, EE, $rootScope, $location) {
+	  if ($window.sessionStorage.token && $window.sessionStorage._id) {
+	    $rootScope.authenticated = true;
+	  }
 
-	    $rootScope.$on('USER_AUTHENTICATED', function() {
-	      $location.path('/dashboard');
+	  $rootScope.$on('USER_AUTHENTICATED', function() {
+	    $location.path('/dashboard');
+	  });
+	})
+
+	.controller('HomeController', ['$scope',
+	  function($scope) {
+	    $scope.userAuthenticated = false;
+
+	    $scope.$on('USER_AUTHENTICATED', function() {
+	      $scope.userAuthenticated = true;
 	    });
-	  })
-
-	  .controller('HomeController', ['$scope',
-	    function($scope) {
-	      $scope.userAuthenticated = false;
-
-	      $scope.$on('USER_AUTHENTICATED', function(){
-	        $scope.userAuthenticated = true;
-	      });
-	    }
-	  ]);
-
+	  }
+	]);
 
 /***/ },
 /* 1 */
@@ -32410,8 +32416,8 @@
 
 	// Attaches token to evey request
 	module.exports = function(app) {
-	  app.factory('authInterceptor', ['$rootScope', '$q', '$window',
-	    function($rootScope, $q, $window) {
+	  app.factory('authInterceptor', ['$rootScope', '$q', '$window', '$location',
+	    function($rootScope, $q, $window, $location) {
 	      return {
 	        request: function(req) {
 	          req.headers = req.headers || {};
@@ -32424,6 +32430,9 @@
 	        response: function(response) {
 	          if (response.status === 401) {
 	            // handle the case where the user is not authenticated
+	            delete $window.sessionStorage.token;
+	            delete $window.sessionStorage._id;
+	            $location.path('/');
 	          }
 	          return response || $q.when(response);
 	        }
@@ -32431,7 +32440,6 @@
 	    }
 	  ]);
 	};
-
 
 /***/ },
 /* 9 */
@@ -32502,6 +32510,14 @@
 	        setConfig: function(config) {
 	          var URI = baseURI + '/setConfig/' + config._id;
 	          return $http.post(URI);
+	        },
+	        getUser: function() {
+	          var URI = ("http://localhost:8080") + '/user/' + $window.sessionStorage._id;
+	          return $http.get(URI);
+	        },
+	        updateUser: function(user) {
+	          var URI = ("http://localhost:8080") + '/user/update/' + $window.sessionStorage._id;
+	          return $http.put(URI, user);
 	        }
 	      };
 	    }
@@ -32683,6 +32699,13 @@
 	              console.log(err);
 	            });
 	        };
+	        // Update user
+	        $scope.updateUser = function(user) {
+	          Butler.updateUser(user).then(function(res) {
+	            console.log(res);
+	          });
+	        }
+	        
 	        // Set config
 	        $scope.setConfig = function(config) {
 	          Butler.setConfig(config)
@@ -42604,6 +42627,53 @@
 	return jQuery;
 	}));
 
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		__webpack_require__(18)(app);
+	}
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.directive('user', function() {
+	    return {
+	      restrict: 'AEC',
+	      templateUrl: 'templates/user.html',
+	      replace: true,
+	      controller: function($scope, Butler, $interval) {
+
+	        // User object
+	        $scope.user = {
+	          name: {
+	            first: "",
+	            last: "",
+	          }
+	        };
+
+	        // Get User
+	        $scope.getUser = function() {
+	          Butler.getUser().then(function(res) {
+	            $scope.user = res.data;
+	          });
+	        }
+
+	        // Update User
+	        $scope.updateUser = function() {
+	          Butler.updateUser($scope.user)
+	            .then(function(res) {
+	              console.log(res);
+	            });
+	        }
+	      }
+	    }
+	  });
+	}
 
 /***/ }
 /******/ ]);
