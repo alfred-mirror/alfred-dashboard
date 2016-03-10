@@ -1,12 +1,14 @@
 .auth-container {
   @include global-module($color-pri-slate, '');
+  @include img-background('/images/main_logo_auth.svg');
 
   .auth-box {
     position: relative;
     color: $color-pri-slate;
-    height: 500px;
+    height: 100%;
     width: 270px;
     margin: 0 auto;
+    padding: 6.5em 0 0 0;
     @include form;
     button {
       @include btn($color-tert-orange, $color-tert-orange, false);
