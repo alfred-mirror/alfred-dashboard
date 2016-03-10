@@ -32437,14 +32437,15 @@
 	  ]);
 	};
 
+
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Handles Token Retrevial and Creation
 	module.exports = function(app) {
-	  app.factory('AuthFactory', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('AuthFactory', ['$http', '$window', '$location',
+	    function($http, $window, $location) {
 	      const baseURI = ("http://localhost:8080") + '/auth';
 	      return {
 	        login: function(data) {
@@ -32477,7 +32478,8 @@
 
 	        logout: function() {
 	          delete $window.sessionStorage.token;
-	          document.location.reload(true);
+	          delete $window.sessionStorage._id;
+	          $location.path('/');
 	        }
 	      };
 	    }
@@ -32489,9 +32491,11 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* global BASE_URI */
+
 	module.exports = function(app) {
-	  app.factory('Butler', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('Butler', ['$http',
+	    function($http) {
 	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
 
 	      return {
@@ -32525,17 +32529,25 @@
 /* 11 */
 /***/ function(module, exports) {
 
+	/* global MAPQUEST_KEY */
 	module.exports = function(app) {
-	  app.factory('GeoLocation', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('GeoLocation', ['$http',
+	    function($http) {
 	      return {
 	        getLocation: function() {
-	          navigator.geolocation.getCurrentPosition(function(position) {
-	            var lat = position.coords.latitude;
-	            var long = position.coords.longitude;
-	            var location = lat + ', ' + long;
-	            console.log(location);
-	            return location;
+	          // navigator.geolocation.getCurrentPosition(function(position) {
+	          //   var lat = position.coords.latitude;
+	          //   var long = position.coords.longitude;
+	          //   var location = lat + ', ' + long;
+	          //   console.log(location);
+	          //   return location;
+	          // });
+	          return new Promise(function(resolve) {
+	            navigator.geolocation.getCurrentPosition(function(position) {
+	              var location = position.coords;
+	              console.log(location.latitude + ', ' + location.longitude);
+	              resolve(location);
+	            });
 	          });
 	        },
 	        // TODO: link variables to .env inputs
@@ -32712,6 +32724,10 @@
 	              console.log(err);
 	            });
 	        }
+	        // $scope.configsToggle() = function() {
+	        //
+	        // }
+
 	        // Edit Config File
 	        $scope.editConfig = function(config) {
 	          $scope.currentConfig = config;
