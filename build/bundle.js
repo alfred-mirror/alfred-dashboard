@@ -32540,7 +32540,11 @@
 	        },
 	        // TODO: link variables to .env inputs
 	        geocoding: function() {
+<<<<<<< 045435689111369a115a43851197e740870c3bf5
 <<<<<<< e8ebf3aadd3034d0bfe5c501ff598135632e7f91
+=======
+<<<<<<< 9d100109487a4c97bbd3c07b9e55fcab714d8171
+>>>>>>> More styling to the dashboard, almost done working out layout kinks.
 	          var address = 'ADDRESS';
 	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
 =======
