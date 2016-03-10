@@ -864,10 +864,17 @@ nav {
   height: 100%;
   height: 140px; }
 
-.config-editor {
-  height: 500px;
-  width: 500px;
-  border: 1px solid lightgrey; }
+.config-editor #widgetBank {
+  background-color: #2A2A2A;
+  color: #FFFFFF;
+  text-align: center; }
+  .config-editor #widgetBank h1, .config-editor #widgetBank h2, .config-editor #widgetBank h3 {
+    font-family: "Slabo", Arial;
+    font-weight: 700; }
+  .config-editor #widgetBank p, .config-editor #widgetBank label {
+    font-family: "Josefin Sans", sans-serif; }
+  .config-editor #widgetBank #weather, .config-editor #widgetBank #greeting, .config-editor #widgetBank #news, .config-editor #widgetBank #time, .config-editor #widgetBank #commute {
+    padding: 1.5em 0; }
 
 .event-container {
   position: relative;
