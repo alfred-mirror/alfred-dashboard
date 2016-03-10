@@ -37,18 +37,18 @@ gulp.task('webpack:dev', () => {
     .pipe(gulp.dest(__dirname + '/build/'));
 });
 
-gulp.task('sass:all', () => {
+gulp.task('sass:dev', () => {
   gulp.src(__dirname + '/app/styles/sass/manifest.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('styles.min.css'))
     .pipe(gulp.dest(__dirname + '/build/css/'));
 });
 
-gulp.task('build:dev', ['html:dev', 'images:dev', 'webpack:dev', 'sass:all']);
+gulp.task('build:dev', ['html:dev', 'images:dev', 'webpack:dev', 'sass:dev']);
 
 
 gulp.task('sass:watch', () => {
-  gulp.watch(files.sass, ['sass:all']);
+  gulp.watch(files.sass, ['sass:dev']);
 });
 
 gulp.task('dev:watch', () => {
