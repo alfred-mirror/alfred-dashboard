@@ -40,7 +40,7 @@ module.exports = function(app) {
             console.log(res);
           });
         }
-        
+
         // Set config
         $scope.setConfig = function(config) {
           Butler.setConfig(config)

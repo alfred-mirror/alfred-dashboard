@@ -32540,8 +32540,13 @@
 	        },
 	        // TODO: link variables to .env inputs
 	        geocoding: function() {
+<<<<<<< e8ebf3aadd3034d0bfe5c501ff598135632e7f91
 	          var address = 'ADDRESS';
 	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
+=======
+	          var address = ADDRESS;
+	          var key = MAPQUEST_KEY;
+>>>>>>> More styling to the dashboard, almost done working out layout kinks.
 	          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
 	          console.log(locationURI);
 	          return $http.get(locationURI);
@@ -42624,6 +42629,7 @@
 	}));
 
 
+<<<<<<< e8ebf3aadd3034d0bfe5c501ff598135632e7f91
 /***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
@@ -42671,5 +42677,7 @@
 	  });
 	}
 
+=======
+>>>>>>> More styling to the dashboard, almost done working out layout kinks.
 /***/ }
 /******/ ]);
