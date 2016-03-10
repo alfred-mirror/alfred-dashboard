@@ -32,11 +32,21 @@
   height: 140px;
 }
 .config-editor {
-
+  background-color: $color-pri-slate;
   #widgetBank {
     @include global-module($color-global-white, $color-pri-slate);
     #weather, #greeting, #news, #time, #commute {
       padding: 1.5em 0;
+      &:hover {
+        background-color: lighten($color-pri-slate, 15%);
+      }
     }
+  }
+}
+
+.nav-label {
+  background-color: lighten($color-tert-orange, 10%);
+  &:hover {
+    background-color: lighten($color-tert-orange, 15%);
   }
 }

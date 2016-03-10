@@ -1,4 +1,4 @@
-// const j = require('jquery');
+const j = require('jquery');
 
 module.exports = function(app) {
   app.directive('dashboard', function() {
@@ -34,6 +34,10 @@ module.exports = function(app) {
               console.log(err);
             });
         };
+        // $scope.configsToggle() = function() {
+        //
+        // }
+
         // Edit Config File
         $scope.editConfig = function(config) {
           $scope.currentConfig = config;
