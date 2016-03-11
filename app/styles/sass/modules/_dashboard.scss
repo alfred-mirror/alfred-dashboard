@@ -6,6 +6,7 @@
   @include global-module($color-global-white, $color-pri-slate);
   margin: 0;
   padding: 0.5em 0;
+  h2 { font-size: 1em; }
 }
 .nav-container {
   background-color: $color-tert-orange;
@@ -37,6 +38,11 @@
   }
 }
 
+.drop-container {
+  @include global-module($color-pri-orange, inherit);
+  padding: 3em 0;
+}
+
 .user-form {
   @include form;
   padding-top: 1em;
@@ -50,6 +56,12 @@
     padding: 1.2em 0;
     margin-top: 1em;
   }
+}
+
+.updateBtn {
+  @include btn($color-sec-orange, none, false);
+  padding: 1.2em 0;
+  font-weight: 700;
 }
 
 .config-border { border-bottom: 1px solid $color-sec-slate !important; }
@@ -74,7 +86,7 @@
 
 .edit-widget-form-something {
   label {
-    text-align: left;  
+    text-align: left;
     margin-top: 5px;
   }
   input {

@@ -84,6 +84,8 @@ nav {
     font-weight: lighter; }
   .profile-container p, .profile-container label {
     font-family: "Josefin Sans", sans-serif; }
+  .profile-container h2 {
+    font-size: 1em; }
 
 .nav-container {
   background-color: #FBBB1C; }
@@ -122,6 +124,18 @@ nav {
       .nav-container .config-container .btn:hover {
         background-color: #ffb958; }
 
+.drop-container {
+  background-color: inherit;
+  color: #EEAD1E;
+  text-align: center;
+  padding: 3em 0; }
+  .drop-container h1, .drop-container h2, .drop-container h3 {
+    font-family: "Arvo", Arial;
+    font-size: 1.2em;
+    font-weight: lighter; }
+  .drop-container p, .drop-container label {
+    font-family: "Josefin Sans", sans-serif; }
+
 .user-form {
   padding-top: 1em; }
   .user-form input {
@@ -145,6 +159,18 @@ nav {
     margin-top: 1em; }
     .user-form button:hover {
       background-color: #ffb958; }
+
+.updateBtn {
+  background-color: #FFA325;
+  color: #FFFFFF;
+  border: none;
+  font-family: "Josefin Sans";
+  font-size: 1em;
+  line-height: 1;
+  padding: 1.2em 0;
+  font-weight: 700; }
+  .updateBtn:hover {
+    background-color: #ffb958; }
 
 .config-border {
   border-bottom: 1px solid #3F3F3F !important; }

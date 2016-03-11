@@ -1,6 +1,6 @@
 <section class="widgetContainer" class="user-form">
 	<form class="edit-widget-form-something row" data-ng-submit="addWidget()">
-		
+
 		<label>Widget Type</label class="col-xs-12">
 		<select name="type" data-ng-model="newWidget.type" required class="col-xs-12">
 			<option value="weather" selected>Weather</option>
@@ -9,16 +9,15 @@
 			<option value="commute">Commute</option>
 			<option value="news">News</option>
 		</select>
-	
+
 		<!-- Widget Name -->
 		<label data-ng-if="newWidget.type" class="col-xs-6"> Widget Name </label>
 		<input data-ng-if="newWidget.type" type="text" required data-ng-model="newWidget.name" class="col-xs-6">
 
-		
 		<!-- Current -->
-		<label data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' " 
+		<label data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' "
 		class="col-xs-6">Current Location</label>
-		<input required type="text" data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' " 
+		<input required type="text" data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' "
 		data-ng-model="current"
 		class="col-xs-6">
 
