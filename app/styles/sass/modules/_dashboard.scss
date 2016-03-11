@@ -86,12 +86,35 @@
 
 .edit-widget-form-something {
   label {
-    text-align: left;
-    margin-top: 5px;
+    text-align: left;  
+    margin-top: 10px;
   }
   input {
-    margin-top: 5px;
+    margin-top: 10px;
   }
+}
+
+
+.widgetSel {
+  background-color: black;
+  color: white;
+  font-family: $type-header;
+  min-height: 2em;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.widgetBtn {
+  @include btn($color-sec-slate, none, false); 
+  padding: 1em 0;
+  margin: .5em 0;
+}
+
+.widgetLabel {
+  font-family: $type-header;
+  font-size: .8em;
+  padding: 5px;
+  margin: 5px;
 }
 
 .row {
