@@ -38,6 +38,17 @@ module.exports = function(app) {
           delete $window.sessionStorage.token;
           delete $window.sessionStorage._id;
           $location.path('/');
+        },
+
+        passwordValidation: function(data) {
+          if (data.password !== data.passwordCheck) {
+            return true;
+          }
+          else if (data.password.length < 7) {
+            return true;
+          } else {
+            return false;
+          }
         }
       };
     }

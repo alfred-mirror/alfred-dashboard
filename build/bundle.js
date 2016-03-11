@@ -32486,6 +32486,17 @@
 	          delete $window.sessionStorage.token;
 	          delete $window.sessionStorage._id;
 	          $location.path('/');
+	        },
+
+	        passwordValidation: function(data) {
+	          if (data.password !== data.passwordCheck) {
+	            return true;
+	          }
+	          else if (data.password.length < 7) {
+	            return true;
+	          } else {
+	            return false;
+	          }
 	        }
 	      };
 	    }
@@ -32663,6 +32674,12 @@
 	    'EE', 'AuthFactory', '$rootScope',
 	    function($scope, $location, $window, EE, AuthFactory, $rootScope) {
 	      // Login function
+	      $scope.checkPass = function(registerModel) {
+	        $scope.valid = false;
+	        $scope.valid = AuthFactory.passwordValidation(registerModel);
+	        console.log($scope.valid);
+	      };
+
 	      $scope.register = function(registerModel) {
 	        console.log('inside $scope.register function');
 	        AuthFactory.register(registerModel).then(function(res) {
