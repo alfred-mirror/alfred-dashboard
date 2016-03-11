@@ -30,11 +30,9 @@
 			<article data-ng-repeat="widget in widgets" drag-container="model" drag-data="{widget: widget}" id="{{widget._id}}" class="widget col-xs-12">
 				<bdi class="row">
 					<section class="widget-label col-xs-6">{{ widget.name }} ({{ widget.type }})</section>
-					<img class="col-xs-6" src="/images/{{widget.type}}.svg" alt="weather">
+					<img class="col-xs-6" data-ng-src="/images/{{widget.type}}.svg" alt="weather">
 				</bdi>
 			</article>
-
-
 
 		</section>
 		</bdi>
