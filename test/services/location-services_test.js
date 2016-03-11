@@ -19,8 +19,8 @@ describe('Location service', () => {
     GeoLocation.getLocation()
       .then(function(location) {
         expect(typeof location).toBe('object');
-        expect(location.latitude).toBe('number');
-        expect(location.longitude).toBe('number');
+        expect(typeof location.latitude).toBe('number');
+        expect(typeof location.longitude).toBe('number');
         called = true;
         done();
       });

@@ -1,0 +1,29 @@
+<section class="widgetContainer">
+	<form class="edit-widget-form-something" data-ng-submit="addWidget()">
+		<label>Widget Type</label>
+		<select name="type" data-ng-model="newWidget.type" required>
+			<option value="weather" selected>Weather</option>
+			<option value="time">Time</option>
+			<option value="greeting">Greeting</option>
+			<option value="commute">Commute</option>
+			<option value="news">News</option>
+		</select>
+	
+
+		<!-- Widget Name -->
+		<label data-ng-if="newWidget.type"> Widget Name </label>
+		<input data-ng-if="newWidget.type" type="text" required data-ng-model="newWidget.name">
+
+		
+		<!-- Current -->
+		<label data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' ">Current Location</label>
+		<input required type="text" data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' " data-ng-model="current">
+
+		<!-- Destination -->
+		<label data-ng-if=" newWidget.type === 'commute' "> Destination</label>
+		<input required type="text" data-ng-if=" newWidget.type === 'commute' " data-ng-model="destination">
+
+		<input type="submit">
+
+	</form>
+</section>

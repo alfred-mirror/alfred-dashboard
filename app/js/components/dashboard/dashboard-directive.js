@@ -10,8 +10,10 @@ module.exports = function(app) {
       scope: {
         options: '='
       },
-      controller: function($scope, Butler, $window, AuthFactory, GeoLocation) {
+      controller: function($scope, Butler, $window, AuthFactory, GeoLocation, Widget) {
+
         $scope.configs = [];
+        $scope.widgets = [];
         $scope.currentConfig = {};
         $scope.state = {
           editing: false
@@ -40,7 +42,7 @@ module.exports = function(app) {
             console.log(res);
           });
         }
-        
+
         // Set config
         $scope.setConfig = function(config) {
           Butler.setConfig(config)
@@ -51,9 +53,6 @@ module.exports = function(app) {
               console.log(err);
             });
         }
-        // $scope.configsToggle() = function() {
-        //
-        // }
 
         // Edit Config File
         $scope.editConfig = function(config) {
@@ -67,6 +66,7 @@ module.exports = function(app) {
         /// Load user preferences
         $scope.getConfig = function() {
 
+          // Get Config
           Butler.getConfig()
             .then(function(res) {
               console.log(res.data);
@@ -74,6 +74,15 @@ module.exports = function(app) {
             }, function(err) {
               console.log(err);
             });
+
+            // Get Widgets
+            Widget.getAllWidgets()
+            .then(function(res) {
+              $scope.widgets = res.data;
+              Widget.widgets = res.data;
+              console.log(res.data);
+            });
+
         };
         $scope.getLocation = function() {
           GeoLocation.getLocation();
@@ -90,9 +99,10 @@ module.exports = function(app) {
         };
 
         $scope.onDrop = function(e, data) {
-          var hasAWidget = j(e.target).has('p').length > 0;
+          console.log(data);
+          var hasAWidget = j(e.target).has('article').length > 0;
           var id_of_droppable = j(e.target).attr('id');
-          var id_of_draggable = j('#' + data.id).parent().attr('id');
+          var id_of_draggable = j('#' + data.widget._id).parent().attr('id');
 
           // scenario: trying to overload a pref
           if (hasAWidget && id_of_droppable !== 'widgetBank'){
@@ -100,7 +110,7 @@ module.exports = function(app) {
           }
 
           // cache element and add the widget to the box
-          var widget = j('#' + data.id);
+          var widget = j('#' + data.widget._id);
           j(e.target).append(widget);
 
           // check if we're dropping into the bank
@@ -114,7 +124,7 @@ module.exports = function(app) {
           }
 
           // add the widget to the module at correct position
-          $scope.currentConfig.modules[id_of_droppable] = widget.text();
+          $scope.currentConfig.modules[id_of_droppable] = data.widget._id;
 
           // scenario: bank to prefs
           if (id_of_draggable === 'widgetBank') {

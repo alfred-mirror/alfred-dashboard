@@ -35,12 +35,6 @@
   background-color: $color-pri-slate;
   #widgetBank {
     @include global-module($color-global-white, $color-pri-slate);
-    #weather, #greeting, #news, #time, #commute {
-      padding: 1.5em 0;
-      &:hover {
-        background-color: lighten($color-pri-slate, 15%);
-      }
-    }
   }
 }
 
@@ -49,4 +43,17 @@
   &:hover {
     background-color: lighten($color-tert-orange, 15%);
   }
+}
+
+.row p, .row img {
+  text-align: left;
+  vertical-align: center;
+  padding-left: 2em;
+  width: 30px;
+  height: auto;
+}
+
+.row img {
+  float: right;
+  padding-right: 2em;
 }

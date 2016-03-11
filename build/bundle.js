@@ -52,11 +52,13 @@
 	// Require Services
 	__webpack_require__(6)(alfred);
 	// Require Auth
-	__webpack_require__(12)(alfred);
+	__webpack_require__(13)(alfred);
 	// Require Dashboard
-	__webpack_require__(14)(alfred);
+	__webpack_require__(15)(alfred);
 	// Require User 
-	__webpack_require__(17)(alfred);
+	__webpack_require__(18)(alfred);
+	// Require Widget 
+	__webpack_require__(20)(alfred);
 
 	// Add Token Middleware
 	alfred
@@ -32386,6 +32388,7 @@
 	  __webpack_require__(9)(app);
 	  __webpack_require__(10)(app);
 	  __webpack_require__(11)(app);
+	  __webpack_require__(12)(app);
 	};
 
 
@@ -32437,14 +32440,15 @@
 	  ]);
 	};
 
+
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Handles Token Retrevial and Creation
 	module.exports = function(app) {
-	  app.factory('AuthFactory', ['$http', '$window',
-	    function($http, $window) {
+	  app.factory('AuthFactory', ['$http', '$window', '$location',
+	    function($http, $window, $location) {
 	      const baseURI = ("http://localhost:8080") + '/auth';
 	      return {
 	        login: function(data) {
@@ -32477,7 +32481,8 @@
 
 	        logout: function() {
 	          delete $window.sessionStorage.token;
-	          document.location.reload(true);
+	          delete $window.sessionStorage._id;
+	          $location.path('/');
 	        }
 	      };
 	    }
@@ -32489,6 +32494,7 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
 	module.exports = function(app) {
 	  app.factory('Butler', ['$http', '$window',
 	    function($http, $window) {
@@ -32530,28 +32536,17 @@
 	    function($http, $window) {
 	      return {
 	        getLocation: function() {
-	          navigator.geolocation.getCurrentPosition(function(position) {
-	            var lat = position.coords.latitude;
-	            var long = position.coords.longitude;
-	            var location = lat + ', ' + long;
-	            console.log(location);
-	            return location;
+	          return new Promise(function(resolve) {
+	            navigator.geolocation.getCurrentPosition(function(position) {
+	              var location = position.coords;
+	              console.log(location.latitude + ', ' + location.longitude);
+	              resolve(location);
+	            });
 	          });
 	        },
 	        // TODO: link variables to .env inputs
-	        geocoding: function() {
-<<<<<<< HEAD
-<<<<<<< 9d100109487a4c97bbd3c07b9e55fcab714d8171
-	          var address = 'ADDRESS';
+	        geocoding: function(address) {
 	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
-=======
-	          var address = ADDRESS;
-	          var key = MAPQUEST_KEY;
->>>>>>> More styling to the dashboard, almost done working out layout kinks.
-=======
-	          var address = ADDRESS;
-	          var key = MAPQUEST_KEY;
->>>>>>> 0c9386b1f405d5cfff9ecd489ba6079fa40146b2
 	          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
 	          console.log(locationURI);
 	          return $http.get(locationURI);
@@ -32566,13 +32561,43 @@
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(app) {
+	  app.factory('Widget', ['$http', '$window',
+	    function($http, $window) {
+	      var baseURI = ("http://localhost:8080") + '/widget/'
+	      return {
+	        widgets: [],
+	        getAllWidgets: function(){
+	        	return $http.get(baseURI);
+	        },
+	        addWidget: function(widgetToAdd) {
+	          var URI = baseURI + 'new'
+	          return $http.post(URI, widgetToAdd);
+	        },
+	        editWidget: function(widgetToEdit) {
+	          var URI = baseURI + widgetToEdit._id;
+	          return $http.put(URI, widgetToEdit);
+	        },
+	        removeWidget: function(widgetToRemove) {
+	          var URI = baseURI + widgetToEdit._id;
+	          return $http.delete(URI);
+	        }
+	      }
+	    }
+	  ]);
+	}
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function(app){
-	  __webpack_require__(13)(app);
+	  __webpack_require__(14)(app);
 	};
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
@@ -32657,19 +32682,19 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-	  __webpack_require__(15)(app);
+	  __webpack_require__(16)(app);
 	};
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const j = __webpack_require__(16);
+	const j = __webpack_require__(17);
 
 	module.exports = function(app) {
 	  app.directive('dashboard', function() {
@@ -32681,8 +32706,10 @@
 	      scope: {
 	        options: '='
 	      },
-	      controller: function($scope, Butler, $window, AuthFactory, GeoLocation) {
+	      controller: function($scope, Butler, $window, AuthFactory, GeoLocation, Widget) {
+
 	        $scope.configs = [];
+	        $scope.widgets = [];
 	        $scope.currentConfig = {};
 	        $scope.state = {
 	          editing: false
@@ -32711,7 +32738,7 @@
 	            console.log(res);
 	          });
 	        }
-	        
+
 	        // Set config
 	        $scope.setConfig = function(config) {
 	          Butler.setConfig(config)
@@ -32722,6 +32749,7 @@
 	              console.log(err);
 	            });
 	        }
+
 	        // Edit Config File
 	        $scope.editConfig = function(config) {
 	          $scope.currentConfig = config;
@@ -32734,6 +32762,7 @@
 	        /// Load user preferences
 	        $scope.getConfig = function() {
 
+	          // Get Config
 	          Butler.getConfig()
 	            .then(function(res) {
 	              console.log(res.data);
@@ -32741,6 +32770,15 @@
 	            }, function(err) {
 	              console.log(err);
 	            });
+
+	            // Get Widgets
+	            Widget.getAllWidgets()
+	            .then(function(res) {
+	              $scope.widgets = res.data;
+	              Widget.widgets = res.data;
+	              console.log(res.data);
+	            });
+
 	        };
 	        $scope.getLocation = function() {
 	          GeoLocation.getLocation();
@@ -32757,9 +32795,10 @@
 	        };
 
 	        $scope.onDrop = function(e, data) {
-	          var hasAWidget = j(e.target).has('p').length > 0;
+	          console.log(data);
+	          var hasAWidget = j(e.target).has('article').length > 0;
 	          var id_of_droppable = j(e.target).attr('id');
-	          var id_of_draggable = j('#' + data.id).parent().attr('id');
+	          var id_of_draggable = j('#' + data.widget._id).parent().attr('id');
 
 	          // scenario: trying to overload a pref
 	          if (hasAWidget && id_of_droppable !== 'widgetBank'){
@@ -32767,7 +32806,7 @@
 	          }
 
 	          // cache element and add the widget to the box
-	          var widget = j('#' + data.id);
+	          var widget = j('#' + data.widget._id);
 	          j(e.target).append(widget);
 
 	          // check if we're dropping into the bank
@@ -32781,7 +32820,7 @@
 	          }
 
 	          // add the widget to the module at correct position
-	          $scope.currentConfig.modules[id_of_droppable] = widget.text();
+	          $scope.currentConfig.modules[id_of_droppable] = data.widget._id;
 
 	          // scenario: bank to prefs
 	          if (id_of_draggable === 'widgetBank') {
@@ -32798,7 +32837,7 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -42635,15 +42674,15 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(18)(app);
+		__webpack_require__(19)(app);
 	}
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
@@ -42672,6 +42711,98 @@
 	        // Update User
 	        $scope.updateUser = function() {
 	          Butler.updateUser($scope.user)
+	            .then(function(res) {
+	              console.log(res);
+	            });
+	        }
+	      }
+	    }
+	  });
+	}
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		__webpack_require__(21)(app);
+	}
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.directive('widgetForm', function() {
+	    return {
+	      restrict: 'AEC',
+	      replace: true,
+	      templateUrl: 'templates/widget.html',
+	      controller: function($scope, Widget, GeoLocation) {
+	        // New Widget
+	        $scope.newWidget = {
+	          options: {}
+	        };
+
+	        // Actually send the Request
+	        $scope.actuallyAdd = function() {
+	          // Add Widget
+	          Widget.addWidget($scope.newWidget)
+	            .then(function(res) {
+	              $scope.current = "";
+	              $scope.destination = "";
+	              $scope.newWidget = {
+	                options: {}
+	              }
+	            });
+	        }
+
+
+	        // Add Widget
+	        $scope.addWidget = function() {
+	          // Commute
+	          if ($scope.newWidget.type === 'commute') {
+	            // Coords Promises
+	            var current = GeoLocation.geocoding($scope.current);
+	            var dest = GeoLocation.geocoding($scope.destination);
+	            // Resolve
+	            Promise.all([current, dest])
+	              .then(function(res) {
+	                console.log('hit');
+	                // Origin
+	                $scope.newWidget.options.origin = {
+	                  lat: res[0].data.results[0].locations[0].latLng.lat,
+	                  long: res[0].data.results[0].locations[0].latLng.lng
+	                }
+	                // Destination
+	                $scope.newWidget.options.destination = {
+	                  lat: res[1].data.results[0].locations[0].latLng.lat,
+	                  long: res[1].data.results[0].locations[0].latLng.lng
+	                }
+	                // Create Widget
+	                $scope.actuallyAdd();
+	              });
+	            // Weather
+	          } else if ($scope.newWidget.type === 'weather') {
+	            GeoLocation.geocoding($scope.current)
+	              .then(function(res) {
+	                // Set location
+	                $scope.newWidget.options.location = {
+	                  lat: res.data.results[0].locations[0].latLng.lat,
+	                  long: res.data.results[0].locations[0].latLng.lng
+	                };
+	                // Create Widget
+	                $scope.actuallyAdd();
+	              });
+	          } else {
+	            // Create Widget
+	            $scope.actuallyAdd();
+	          }
+	        };
+
+	        // Edit Widget
+	        $scope.editWidget = function(editedWidget) {
+	          Widget.editWidget(editedWidget)
 	            .then(function(res) {
 	              console.log(res);
 	            });
