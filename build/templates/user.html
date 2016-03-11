@@ -1,3 +1,4 @@
+<<<<<<< cc67c772950e1a8dd5834be6c96f87f35d0b8c75
 <section class="col-xs-12 user-form" data-ng-init="getUser()">
 	<form data-ng-submit="updateUser()" class="row">
 		<label class="col-xs-12">First Name</label>
@@ -5,5 +6,15 @@
 		<label class="col-xs-12">Last Name</label>
 		<input class="col-xs-12" data-ng-model="user.name.last">
 		<button class="col-xs-12" type="submit">SUBMIT</button>
+=======
+<section class="row fullscreen" data-ng-init="getUser()">
+  {{user.name.first}}
+	<form data-ng-submit="updateUser()">
+		<label>First Name</label>
+		<input data-ng-model="user.name.first">
+		<label>Last Name</label>
+		<input data-ng-model="user.name.last">
+		<input type="submit">
+>>>>>>> mergy
 	</form>
 </section>

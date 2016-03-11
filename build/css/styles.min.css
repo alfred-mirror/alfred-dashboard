@@ -175,6 +175,13 @@ nav {
   .nav-label:hover {
     background-color: #fcd267; }
 
+.edit-widget-form-something label {
+  text-align: left;
+  margin-top: 5px; }
+
+.edit-widget-form-something input {
+  margin-top: 5px; }
+
 .row img {
   height: 30px;
   width: auto;
