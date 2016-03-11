@@ -38,30 +38,6 @@
   }
 }
 
-// Sass Color Functions
-// @function set-opacity($child) {
-//   @return ($child * 5) + 10 + '%';
-//   @debug 'You returned #{$child}';
-// }
-//
-// @function bkg-color-pick($color, $child) {
-//   @debug 'Child is: ' + $child + '%';
-//   @return lighten($color, set-opacity($child));
-// }
-//
-// @function hover-color-pick($color, $child) {
-//   @return bkg-color-pick($color, $child + 3);
-// }
-//
-// @mixin config-colors($color, $child) {
-//   &:nth-child(1 + $child) {
-//     background-color: bkg-color-pick($color, $child);
-//     &:hover {
-//       background-color: hover-color-pick($color, $child); // child is a number
-//     }
-//   }
-// }
-
 @mixin img-background($filepath) {
   background-image: url($filepath);
   background-repeat: no-repeat;
