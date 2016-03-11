@@ -28,8 +28,10 @@ module.exports = function(app) {
           // Commute
           if ($scope.newWidget.type === 'commute') {
             // Coords Promises
-            var current = GeoLocation.geocoding($scope.current);
-            var dest = GeoLocation.geocoding($scope.destination);
+            var current = GeoLocation.geocoding($scope.newWidget.current);
+            var dest = GeoLocation.geocoding($scope.newWidget.destination);
+            console.log($scope.newWidget.current)
+            console.log($scope.newWidget.destination);
             // Resolve
             Promise.all([current, dest])
               .then(function(res) {

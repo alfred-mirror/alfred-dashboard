@@ -10,7 +10,7 @@
 		<section data-ng-init="getLocation()" class="col-xs-12">
 			<article data-ng-init="geocoding()" class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
 				<h4 data-ng-click="state.updateProfile = !state.updateProfile" class="config-item col-xs-12 middle-xs">SETTINGS</h4>
-				<user data-ng-if="state.updateProfile"></user>
+				<user data-ng-show="state.updateProfile"></user>
 				<h4 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h4>
 				<h3 class="profile-container col-xs-12 middle-xs">MIRROR CONFIGS</h3>
 				<h4 data-ng-click="getConfig()" class="config-border config-item col-xs-6">{{ config.name | uppercase }}</h4>
@@ -25,8 +25,8 @@
 		<h3>WIDGET BANK</h3>
 		<section class="row" id="widgetBank" drop-container
 			on-drop="onDrop($event, $dragData)">
-			<button data-ng-click="addWidget()" class="col-xs-12 btn">ADD A WIDGET</button>
-			<widget-form data-ng-if="widget.add" class="col-xs-12"></widget-form>
+			<button data-ng-click="state.widget = !state.widget" class="col-xs-12 btn">ADD A WIDGET</button>
+			<widget-form data-ng-show="state.widget" class="col-xs-12"></widget-form>
 			<article data-ng-repeat="widget in widgets" drag-container="model" drag-data="{widget: widget}" id="{{widget._id}}" class="widget col-xs-12">
 				<bdi class="row">
 					<section class="widget-label col-xs-6">{{ widget.name }} ({{ widget.type }})</section>

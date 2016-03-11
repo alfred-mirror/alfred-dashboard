@@ -32452,7 +32452,7 @@
 	module.exports = function(app) {
 	  app.factory('AuthFactory', ['$http', '$window', '$location',
 	    function($http, $window, $location) {
-	      const baseURI = ("http://localhost:8080") + '/auth';
+	      const baseURI = ("https://alfred-backend.herokuapp.com") + '/auth';
 	      return {
 	        login: function(data) {
 	          var headerData = data.email + ':' + data.password;
@@ -32513,7 +32513,7 @@
 	module.exports = function(app) {
 	  app.factory('Butler', ['$http', '$window',
 	    function($http, $window) {
-	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
+	      const baseURI = ("https://alfred-backend.herokuapp.com") + '/dashboard/config';
 
 	      return {
 	        // Load User Preferences
@@ -32529,11 +32529,11 @@
 	          return $http.post(URI);
 	        },
 	        getUser: function() {
-	          var URI = ("http://localhost:8080") + '/user/' + $window.sessionStorage._id;
+	          var URI = ("https://alfred-backend.herokuapp.com") + '/user/' + $window.sessionStorage._id;
 	          return $http.get(URI);
 	        },
 	        updateUser: function(user) {
-	          var URI = ("http://localhost:8080") + '/user/update/' + $window.sessionStorage._id;
+	          var URI = ("https://alfred-backend.herokuapp.com") + '/user/update/' + $window.sessionStorage._id;
 	          return $http.put(URI, user);
 	        }
 	      };
@@ -32562,7 +32562,7 @@
 	        // TODO: link variables to .env inputs
 	        geocoding: function(address) {
 	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
-	          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
+	          var locationURI = 'https://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
 	          console.log(locationURI);
 	          return $http.get(locationURI);
 	        }
@@ -32581,7 +32581,7 @@
 	module.exports = function(app) {
 	  app.factory('Widget', ['$http', '$window',
 	    function($http, $window) {
-	      var baseURI = ("http://localhost:8080") + '/widget/';
+	      var baseURI = ("https://alfred-backend.herokuapp.com") + '/widget/';
 	      return {
 	        widgets: [],
 	        getAllWidgets: function() {
@@ -32740,16 +32740,11 @@
 	        $scope.state = {
 	          editing: false,
 	          addWidget: false,
-	          updateProfile: false
+	          updateProfile: false,
+	          widget: false
 	        };
 
-
-	        $scope.profile = {
-	          editing: false
-	        };
-	        $scope.widget = {
-	          add: false
-	        };
+	        
 	        // Store UserId
 	        $scope.user_id = $window.sessionStorage._id;
 	        // Show Auth Container
@@ -32784,14 +32779,6 @@
 	            }, function(err) {
 	              console.log(err);
 	            });
-	        };
-	        
-	        $scope.editUser = function(user) {
-	          $scope.profile.editing = true;
-	        };
-
-	        $scope.addWidget = function() {
-	          $scope.widget.add = true;
 	        };
 
 	        // Edit Config File
@@ -42810,8 +42797,10 @@
 	          // Commute
 	          if ($scope.newWidget.type === 'commute') {
 	            // Coords Promises
-	            var current = GeoLocation.geocoding($scope.current);
-	            var dest = GeoLocation.geocoding($scope.destination);
+	            var current = GeoLocation.geocoding($scope.newWidget.current);
+	            var dest = GeoLocation.geocoding($scope.newWidget.destination);
+	            console.log($scope.newWidget.current)
+	            console.log($scope.newWidget.destination);
 	            // Resolve
 	            Promise.all([current, dest])
 	              .then(function(res) {

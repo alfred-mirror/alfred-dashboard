@@ -1,3 +1,3 @@
 module.exports = {
-	BASE_URI: 'http://localhost:8080'
+	BASE_URI: 'https://alfred-backend.herokuapp.com'
 }

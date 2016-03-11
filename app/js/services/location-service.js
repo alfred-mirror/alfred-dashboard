@@ -14,7 +14,7 @@ module.exports = function(app) {
         // TODO: link variables to .env inputs
         geocoding: function(address) {
           var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
-          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
+          var locationURI = 'https://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
           console.log(locationURI);
           return $http.get(locationURI);
         }

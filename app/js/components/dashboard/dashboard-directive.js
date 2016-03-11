@@ -20,16 +20,11 @@ module.exports = function(app) {
         $scope.state = {
           editing: false,
           addWidget: false,
-          updateProfile: false
+          updateProfile: false,
+          widget: false
         };
 
-
-        $scope.profile = {
-          editing: false
-        };
-        $scope.widget = {
-          add: false
-        };
+        
         // Store UserId
         $scope.user_id = $window.sessionStorage._id;
         // Show Auth Container
@@ -64,14 +59,6 @@ module.exports = function(app) {
             }, function(err) {
               console.log(err);
             });
-        };
-        
-        $scope.editUser = function(user) {
-          $scope.profile.editing = true;
-        };
-
-        $scope.addWidget = function() {
-          $scope.widget.add = true;
         };
 
         // Edit Config File

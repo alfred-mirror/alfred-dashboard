@@ -18,12 +18,12 @@
 		<label data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' "
 		class="col-xs-6">Current Location</label>
 		<input required type="text" data-ng-if=" newWidget.type === 'weather' || newWidget.type === 'commute' "
-		data-ng-model="current"
+		data-ng-model="newWidget.current"
 		class="col-xs-6">
 
 		<!-- Destination -->
 		<label data-ng-if=" newWidget.type === 'commute' " class="col-xs-6"> Destination</label>
-		<input required type="text" data-ng-if=" newWidget.type === 'commute' " data-ng-model="destination" class="col-xs-6">
+		<input required type="text" data-ng-if=" newWidget.type === 'commute' " data-ng-model="newWidget.destination" class="col-xs-6">
 
 		<input type="submit" class="col-xs-12">
 
