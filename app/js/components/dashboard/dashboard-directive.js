@@ -88,11 +88,7 @@ module.exports = function(app) {
               console.log(err);
             });
 
-<<<<<<< HEAD
           // Get Widgets
-=======
-            // Get Widgets
->>>>>>> 510da00c94c746e28c02690b58de6c1e636ff4f1
           Widget.getAllWidgets()
             .then(function(res) {
               $scope.widgets = res.data;
