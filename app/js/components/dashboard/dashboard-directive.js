@@ -41,7 +41,7 @@ module.exports = function(app) {
           Butler.updateUser(user).then(function(res) {
             console.log(res);
           });
-        }
+        };
 
         // Set config
         $scope.setConfig = function(config) {
@@ -52,7 +52,7 @@ module.exports = function(app) {
             }, function(err) {
               console.log(err);
             });
-        }
+        };
 
         // Edit Config File
         $scope.editConfig = function(config) {
@@ -75,8 +75,8 @@ module.exports = function(app) {
               console.log(err);
             });
 
-            // Get Widgets
-            Widget.getAllWidgets()
+          // Get Widgets
+          Widget.getAllWidgets()
             .then(function(res) {
               $scope.widgets = res.data;
               Widget.widgets = res.data;
@@ -84,6 +84,7 @@ module.exports = function(app) {
             });
 
         };
+        
         $scope.getLocation = function() {
           GeoLocation.getLocation();
         };

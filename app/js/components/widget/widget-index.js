@@ -1,3 +1,3 @@
 module.exports = function(app) {
-	require('./widget-directive')(app);
-}
+  require('./widget-directive')(app);
+};

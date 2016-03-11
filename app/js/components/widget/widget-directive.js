@@ -15,14 +15,13 @@ module.exports = function(app) {
           // Add Widget
           Widget.addWidget($scope.newWidget)
             .then(function(res) {
-              $scope.current = "";
-              $scope.destination = "";
+              $scope.current = '';
+              $scope.destination = '';
               $scope.newWidget = {
                 options: {}
-              }
+              };
             });
-        }
-
+        };
 
         // Add Widget
         $scope.addWidget = function() {
@@ -39,12 +38,12 @@ module.exports = function(app) {
                 $scope.newWidget.options.origin = {
                   lat: res[0].data.results[0].locations[0].latLng.lat,
                   long: res[0].data.results[0].locations[0].latLng.lng
-                }
+                };
                 // Destination
                 $scope.newWidget.options.destination = {
                   lat: res[1].data.results[0].locations[0].latLng.lat,
                   long: res[1].data.results[0].locations[0].latLng.lng
-                }
+                };
                 // Create Widget
                 $scope.actuallyAdd();
               });
@@ -72,8 +71,8 @@ module.exports = function(app) {
             .then(function(res) {
               console.log(res);
             });
-        }
+        };
       }
-    }
+    };
   });
-}
+};
