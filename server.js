@@ -6,4 +6,4 @@ app.use(express.static('build'));
 
 app.listen(PORT, () => {
   console.log('Server up on port ' + PORT);
-})
+});

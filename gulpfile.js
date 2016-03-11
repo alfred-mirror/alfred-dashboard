@@ -10,12 +10,14 @@ const files = {
   sass: [__dirname + '/app/styles/sass/**/*.scss']
 };
 
+// Linter
 gulp.task('lint', () => {
-  return gulp.src(['**/*.js', '!**/node_modules/*', '!**/build/*'])
+  return gulp.src(['**/*.js', '!**/node_modules/**/*', '!**/build/*', '!**/*bundle.js'])
     .pipe(eslint(__dirname + '/.eslintrc'))
     .pipe(eslint.format());
 });
 
+// Dev actions
 gulp.task('html:dev', () => {
   gulp.src([__dirname + '/app/*.html', __dirname + '/app/**/*.html'])
     .pipe(gulp.dest(__dirname + '/build'));
@@ -46,7 +48,7 @@ gulp.task('sass:dev', () => {
 
 gulp.task('build:dev', ['html:dev', 'images:dev', 'webpack:dev', 'sass:dev']);
 
-
+// Watch tasks
 gulp.task('sass:watch', () => {
   gulp.watch(files.sass, ['sass:dev']);
 });
@@ -55,6 +57,7 @@ gulp.task('dev:watch', () => {
   gulp.watch(files.all, ['webpack:dev', 'html:dev']);
 });
 
+// Tests
 gulp.task('webpack:test', () => {
   gulp.src(__dirname + '/test/test_entry.js')
     .pipe(webpack({

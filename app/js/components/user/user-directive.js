@@ -9,8 +9,8 @@ module.exports = function(app) {
         // User object
         $scope.user = {
           name: {
-            first: "",
-            last: "",
+            first: '',
+            last: ''
           }
         };
 
@@ -19,7 +19,7 @@ module.exports = function(app) {
           Butler.getUser().then(function(res) {
             $scope.user = res.data;
           });
-        }
+        };
 
         // Update User
         $scope.updateUser = function() {
@@ -27,8 +27,8 @@ module.exports = function(app) {
             .then(function(res) {
               console.log(res);
             });
-        }
+        };
       }
-    }
+    };
   });
-}
+};
