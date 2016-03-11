@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-var j = require('jquery');
 
 // Handles Token Retrevial and Creation
 module.exports = function(app) {
