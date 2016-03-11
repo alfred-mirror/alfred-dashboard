@@ -30,6 +30,10 @@
       }
     }
 
+    .user-form {
+      @include form;
+    }
+
     .btn {
       @include btn($color-sec-orange, none, false);
       font-weight: 700;
