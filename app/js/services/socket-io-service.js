@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+// NOT USED
+
 module.exports = function(app) {
   app.factory('SocketIO', ['$rootScope', '$window',
     function($rootScope, $window) {
@@ -12,7 +15,7 @@ module.exports = function(app) {
             $rootScope.$apply(function() {
               callback.apply(socket, args);
             });
-          })
+          });
         },
         // Emit an event
         emit: function(eventName, data, callback) {
@@ -29,12 +32,11 @@ module.exports = function(app) {
           });
         },
         removeListener: function(eventName, callback) {
-        	callback = (callback) ? callback : function() {};
-        	// Remove listeners
-        	
-        	socket.removeListener(eventName, callback);
+          callback = (callback) ? callback : function() {};
+          // Remove listeners
+          socket.removeListener(eventName, callback);
         }
-      }
+      };
     }
   ]);
-}
+};

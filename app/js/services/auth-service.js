@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 // Handles Token Retrevial and Creation
 module.exports = function(app) {
   app.factory('AuthFactory', ['$http', '$window', '$location',
