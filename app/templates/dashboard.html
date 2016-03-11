@@ -10,7 +10,7 @@
 		<section data-ng-init="getLocation()" class="col-xs-12">
 			<article data-ng-init="geocoding()" class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
 				<h4 data-ng-click="state.updateProfile = !state.updateProfile" class="config-item col-xs-12 middle-xs">SETTINGS</h4>
-				<user data-ng-if="state.updateProfile" class="user-form"></user>
+				<user data-ng-if="state.updateProfile"></user>
 				<h4 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h4>
 				<h3 class="profile-container col-xs-12 middle-xs">MIRROR CONFIGS</h3>
 				<h4 data-ng-click="getConfig()" class="config-border config-item col-xs-6">{{ config.name | uppercase }}</h4>

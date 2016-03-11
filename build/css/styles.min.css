@@ -111,12 +111,6 @@ nav {
       letter-spacing: 1px; }
       .nav-container .config-container .config-item:hover {
         background-color: #fde199; }
-    .nav-container .config-container .user-form input {
-      height: 1.75em;
-      font-size: 1em;
-      padding: 0.4em 0.7em;
-      border: 2px solid #FBBB1C;
-      color: #8c8c8c; }
     .nav-container .config-container .btn {
       background-color: #FFA325;
       color: #FFFFFF;
@@ -127,6 +121,30 @@ nav {
       font-weight: 700; }
       .nav-container .config-container .btn:hover {
         background-color: #ffb958; }
+
+.user-form {
+  padding-top: 1em; }
+  .user-form input {
+    height: 1.75em;
+    font-size: 1em;
+    padding: 0.4em 0.7em;
+    border: 2px solid #FBBB1C;
+    color: #8c8c8c; }
+  .user-form input {
+    height: 2.5em;
+    margin-right: 0; }
+  .user-form button {
+    background-color: #FFA325;
+    color: #FFFFFF;
+    border: none;
+    font-family: "Josefin Sans";
+    font-size: 1em;
+    line-height: 1;
+    font-weight: 700;
+    padding: 1.2em 0;
+    margin-top: 1em; }
+    .user-form button:hover {
+      background-color: #ffb958; }
 
 .config-border {
   border-bottom: 1px solid #3F3F3F !important; }
