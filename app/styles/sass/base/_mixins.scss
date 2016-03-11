@@ -68,3 +68,40 @@
   background-size: cover;
   height: 100%;
 }
+
+@mixin widget($background, $iconpath) {
+  @if $iconpath == 'weather' {
+    @include img-background('/images/#{$iconpath}.svg');
+    background-size: 15%;
+    background-position: right;
+    padding-right: 1em;
+  } @else if $iconpath == 'greeting' {
+    @include img-background('/images/#{$iconpath}.svg');
+    background-size: 15%;
+    background-position: right;
+    padding-right: 1em;
+  } @else if $iconpath == 'news' {
+    @include img-background('/images/#{$iconpath}.svg');
+    background-size: 15%;
+    background-position: right;
+    padding-right: 1em;
+  } @else if $iconpath == 'time' {
+    @include img-background('/images/#{$iconpath}.svg');
+    background-size: 15%;
+    background-position: right;
+    padding-right: 1em;
+  } @else if $iconpath == 'commute' {
+    background-size: 15%;
+    background-position: right;
+    padding-right: 1em;
+    @include img-background('/images/#{$iconpath}.svg');
+    background-size: 15%;
+    background-position: right;
+    padding-right: 1em;
+  }
+  background-color: $background;
+  padding: 1.5em 0;
+  &:hover {
+    background-color: lighten($background, 15%);
+  }
+}

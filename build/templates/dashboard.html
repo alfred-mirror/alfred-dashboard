@@ -1,110 +1,106 @@
 <section data-ng-init="getConfig()" class="dashboard-page row">
 
+  <bdi class="nav-container col-md-3">
+    <section class="row">
+      <section class="logo-container col-xs-12">
+          <!-- SVG Logo Container -->
+      </section>
+      <section class="profile-container col-xs-12">
+          <h1>Welcome</h1>
+          <user></user>
+      </section>
 
-    <bdi class="nav-container col-md-3">
-        <section class="row">
-            <section class="logo-container col-xs-12">
-                <!-- SVG Logo Container -->
-            </section>
-            <section class="profile-container col-xs-12">
-                <h1>Welcome</h1>
-                <user></user>
-            </section>
+      <section data-ng-init="getLocation()" class="col-xs-12">
+        <article data-ng-init="geocoding()" class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
+          <h3 class="config-item col-xs-12 middle-xs">SETTINGS</h3>
+          <h3 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h3>
+          <h3 class="profile-container col-xs-12 middle-xs">MIRROR CONFIGS</h3>
+          <h3 data-ng-click="getConfig()" class="config-item col-xs-12">{{ config.name | uppercase }}</h3>
+        </article>
+      </section>
+    </section>
+  </bdi>
 
-            <section data-ng-init="getLocation()" class="col-xs-12">
-                <article data-ng-init="geocoding()" class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
-                    <h3 class="config-item col-xs-12 middle-xs">SETTINGS</h3>
-                    <h3 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h3>
-                    <h3 class="profile-container col-xs-12 middle-xs">MIRROR CONFIGS</h3>
-                    <h3 data-ng-click="getConfig()" class="config-item col-xs-12">{{ config.name | uppercase }}</h3>
-                </article>
-            </section>
-        </section>
-    </bdi>
+  <section class="config-editor col-md-3" data-ng-if="state.editing">
+    <bdi id="fullscreen" class="row">
+      <bdi class="col-xs-12">
+      <h3>WIDGET BANK</h3>
+      <section class="row" id="widgetBank" drop-container
+      on-drop="onDrop($event, $dragData)">
+        <p drag-container="model"
+        drag-data="{id: 'weather'}"
+        id="weather"
+        class="widget col-xs-12"
+        >WEATHER
+				<img src="/images/weather.svg" alt="weather"></p>
+        <p drag-container="model"
+        drag-data="{id: 'greeting'}"
+        id="greeting"
+        class="widget col-xs-12"
+        >GREETING
+				<img src="/images/greeting.svg" alt="greeting"></p>
+        <p drag-container="model"
+        drag-data="{id: 'news'}"
+        id="news"
+        class="widget col-xs-12"
+        >NEWS
+				<img src="/images/news.svg" alt="news"></p>
+        <p drag-container="model"
+        drag-data="{id: 'time'}"
+        id="time"
+        class="widget col-xs-12"
+        >TIME
+				<img src="/images/time.svg" alt="time"></p>
+        <p drag-container="model"
+        drag-data="{id: 'commute' }"
+        id="commute"
+        class="widget col-xs-12"
+        >COMMUTE
+				<img src="/images/commute.svg" alt="commute"></p>
+      </section>
+	    </bdi>
+		</bdi>
+	</section>
 
-    <!-- <section data-ng-if="state.editing" class="col-md-9">
-        <bdi class="row"> -->
-            <section class="config-editor col-md-3" data-ng-if="state.editing">
-                <bdi id="fullscreen" class="row">
-                    <bdi id="widgetBank" drop-container
-                    on-drop="onDrop($event, $dragData)"
-                    class="col-xs-12">
-                    <h3>WIDGET BANK</h3>
-                    <section class="row">
-                        <p drag-container="model"
-                        drag-data="{id: 'weather'}"
-                        id="weather"
-                        class="col-xs-12"
-                        >WEATHER</p>
-                        <p drag-container="model"
-                        drag-data="{id: 'greeting'}"
-                        id="greeting"
-                        class="col-xs-12"
-                        >GREETING</p>
-                        <p drag-container="model"
-                        drag-data="{id: 'news'}"
-                        id="news"
-                        class="col-xs-12"
-                        >NEWS</p>
-                        <p drag-container="model"
-                        drag-data="{id: 'time'}"
-                        id="time"
-                        class="col-xs-12"
-                        >TIME</p>
-                        <p drag-container="model"
-                        drag-data="{id: 'commute' }"
-                        id="commute"
-                        class="col-xs-12"
-                        >COMMUTE</p>
-                    </section>
-                </bdi>
-							</bdi>
-						</section>
+	<section ng-model="currentConfig" data-ng-if="state.editing" class="col-md-6">
+	  <bdi class="row">
+			<article id="0"
+	    drop-container
+	    on-drop="onDrop($event, $dragData)"
+	    class="col-xs-12"
+	    style="border: black solid 1px;">
+	    </article>
 
-            <!-- </bdi>
-        </section> -->
+	    <article id="1"
+	    drop-container
+	    on-drop="onDrop($event, $dragData)"
+	    class="col-xs-12"
+	    style="width: 100px; height:100px; border: black solid 1px;"
+	    ></article>
 
-        <section ng-model="currentConfig" data-ng-if="state.editing" class="col-md-6">
-            <bdi class="row">
-                <article id="0"
-                drop-container
-                on-drop="onDrop($event, $dragData)"
-                class="col-xs-12"
-                style="width: 100px; height:100px; border: black solid 1px;">
-                </article>
+	    <article id="2"
+	    drop-container
+	    on-drop="onDrop($event, $dragData)"
+	    class="col-xs-12"
+	    style="width: 100px; height:100px; border: black solid 1px;">
+	    </article>
 
-                <article id="1"
-                drop-container
-                on-drop="onDrop($event, $dragData)"
-                class="col-xs-12"
-                style="width: 100px; height:100px; border: black solid 1px;"
-                ></article>
+	    <article id="3"
+	    drop-container
+	    on-drop="onDrop($event, $dragData)"
+	    class="col-xs-12"
+	    style="width: 100px; height:100px; border: black solid 1px;"
+	    ></article>
 
-                <article id="2"
-                drop-container
-                on-drop="onDrop($event, $dragData)"
-                class="col-xs-12"
-                style="width: 100px; height:100px; border: black solid 1px;">
-                </article>
+	    <article id="4"
+	    drop-container
+	    on-drop="onDrop($event, $dragData)"
+	    class="col-xs-12"
+	    style="width: 100px; height:100px; border: black solid 1px;"
+	    ></article>
 
-                <article id="3"
-                drop-container
-                on-drop="onDrop($event, $dragData)"
-                class="col-xs-12"
-                style="width: 100px; height:100px; border: black solid 1px;"
-                ></article>
-
-                <article id="4"
-                drop-container
-                on-drop="onDrop($event, $dragData)"
-                class="col-xs-12"
-                style="width: 100px; height:100px; border: black solid 1px;"
-                ></article>
-
-                <button data-ng-click="updateConfig(currentConfig)">update preferences</button>
-            </bdi>
-        </section>
-    <!-- </bdi>
-</section> -->
+	    <button data-ng-click="updateConfig(currentConfig)">update preferences</button>
+	  </bdi>
+	</section>
 
 </section>

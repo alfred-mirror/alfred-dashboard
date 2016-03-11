@@ -23,36 +23,40 @@
 
   <section class="config-editor col-md-3" data-ng-if="state.editing">
     <bdi id="fullscreen" class="row">
-      <bdi id="widgetBank" drop-container
-      on-drop="onDrop($event, $dragData)"
-      class="col-xs-12">
+      <bdi class="col-xs-12">
       <h3>WIDGET BANK</h3>
-      <section class="row">
+      <section class="row" id="widgetBank" drop-container
+      on-drop="onDrop($event, $dragData)">
         <p drag-container="model"
         drag-data="{id: 'weather'}"
         id="weather"
-        class="col-xs-12"
-        >WEATHER</p>
+        class="widget col-xs-12"
+        >WEATHER
+				<img src="/images/weather.svg" alt="weather"></p>
         <p drag-container="model"
         drag-data="{id: 'greeting'}"
         id="greeting"
-        class="col-xs-12"
-        >GREETING</p>
+        class="widget col-xs-12"
+        >GREETING
+				<img src="/images/greeting.svg" alt="greeting"></p>
         <p drag-container="model"
         drag-data="{id: 'news'}"
         id="news"
-        class="col-xs-12"
-        >NEWS</p>
+        class="widget col-xs-12"
+        >NEWS
+				<img src="/images/news.svg" alt="news"></p>
         <p drag-container="model"
         drag-data="{id: 'time'}"
         id="time"
-        class="col-xs-12"
-        >TIME</p>
+        class="widget col-xs-12"
+        >TIME
+				<img src="/images/time.svg" alt="time"></p>
         <p drag-container="model"
         drag-data="{id: 'commute' }"
         id="commute"
-        class="col-xs-12"
-        >COMMUTE</p>
+        class="widget col-xs-12"
+        >COMMUTE
+				<img src="/images/commute.svg" alt="commute"></p>
       </section>
 	    </bdi>
 		</bdi>
@@ -60,11 +64,11 @@
 
 	<section ng-model="currentConfig" data-ng-if="state.editing" class="col-md-6">
 	  <bdi class="row">
-	    <article id="0"
+			<article id="0"
 	    drop-container
 	    on-drop="onDrop($event, $dragData)"
 	    class="col-xs-12"
-	    style="width: 100px; height:100px; border: black solid 1px;">
+	    style="border: black solid 1px;">
 	    </article>
 
 	    <article id="1"
