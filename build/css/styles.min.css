@@ -123,15 +123,22 @@ nav {
       font-weight: 700; }
     .config-editor #widgetBank p, .config-editor #widgetBank label {
       font-family: "Josefin Sans", sans-serif; }
-    .config-editor #widgetBank #weather, .config-editor #widgetBank #greeting, .config-editor #widgetBank #news, .config-editor #widgetBank #time, .config-editor #widgetBank #commute {
-      padding: 1.5em 0; }
-      .config-editor #widgetBank #weather:hover, .config-editor #widgetBank #greeting:hover, .config-editor #widgetBank #news:hover, .config-editor #widgetBank #time:hover, .config-editor #widgetBank #commute:hover {
-        background-color: #505050; }
 
 .nav-label {
   background-color: #fcca4e; }
   .nav-label:hover {
     background-color: #fcd267; }
+
+.row p, .row img {
+  text-align: left;
+  vertical-align: center;
+  padding-left: 2em;
+  width: 30px;
+  height: auto; }
+
+.row img {
+  float: right;
+  padding-right: 2em; }
 
 .event-container {
   position: relative;

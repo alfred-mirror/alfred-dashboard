@@ -1,4 +1,3 @@
-
 module.exports = function(app) {
   app.factory('GeoLocation', ['$http', '$window',
     function($http, $window) {
@@ -13,8 +12,7 @@ module.exports = function(app) {
           });
         },
         // TODO: link variables to .env inputs
-        geocoding: function() {
-          var address = '588 Bell St, Seattle WA';
+        geocoding: function(address) {
           var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
           var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
           console.log(locationURI);
