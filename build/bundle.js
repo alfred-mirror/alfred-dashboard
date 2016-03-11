@@ -55,9 +55,9 @@
 	__webpack_require__(13)(alfred);
 	// Require Dashboard
 	__webpack_require__(15)(alfred);
-	// Require User 
+	// Require User
 	__webpack_require__(18)(alfred);
-	// Require Widget 
+	// Require Widget
 	__webpack_require__(20)(alfred);
 
 	// Add Token Middleware
@@ -66,38 +66,39 @@
 	    $httpProvider.interceptors.push('authInterceptor');
 	  })
 
-	.config(['$routeProvider', '$locationProvider',
-	  function(routeProvider, locationProvider) {
-	    routeProvider
-	      .when('/', {
-	        templateUrl: 'templates/auth.html'
-	      })
-	      .when('/dashboard', {
-	        template: '<dashboard></dashboard>',
-	        controller: 'HomeController'
-	      })
-	  }
-	])
+	  .config(['$routeProvider', '$locationProvider',
+	    function(routeProvider, locationProvider) {
+	      routeProvider
+	        .when('/', {
+	          templateUrl: 'templates/auth.html'
+	        })
+	        .when('/dashboard', {
+	          template: '<dashboard></dashboard>',
+	          controller: 'HomeController'
+	        });
+	    }
+	  ])
 
-	.run(function($window, EE, $rootScope, $location) {
-	  if ($window.sessionStorage.token && $window.sessionStorage._id) {
-	    $rootScope.authenticated = true;
-	  }
+	  .run(function($window, EE, $rootScope, $location) {
+	    if ($window.sessionStorage.token && $window.sessionStorage._id) {
+	      $rootScope.authenticated = true;
+	    }
 
-	  $rootScope.$on('USER_AUTHENTICATED', function() {
-	    $location.path('/dashboard');
-	  });
-	})
-
-	.controller('HomeController', ['$scope',
-	  function($scope) {
-	    $scope.userAuthenticated = false;
-
-	    $scope.$on('USER_AUTHENTICATED', function() {
-	      $scope.userAuthenticated = true;
+	    $rootScope.$on('USER_AUTHENTICATED', function() {
+	      $location.path('/dashboard');
 	    });
-	  }
-	]);
+	  })
+
+	  .controller('HomeController', ['$scope',
+	    function($scope) {
+	      $scope.userAuthenticated = false;
+
+	      $scope.$on('USER_AUTHENTICATED', function() {
+	        $scope.userAuthenticated = true;
+	      });
+	    }
+	  ]);
+
 
 /***/ },
 /* 1 */
@@ -32445,6 +32446,8 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* eslint-disable no-undef */
+
 	// Handles Token Retrevial and Creation
 	module.exports = function(app) {
 	  app.factory('AuthFactory', ['$http', '$window', '$location',
@@ -32494,7 +32497,8 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+	/* eslint-disable no-undef */
+
 	module.exports = function(app) {
 	  app.factory('Butler', ['$http', '$window',
 	    function($http, $window) {
@@ -32561,17 +32565,19 @@
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* eslint-disable no-undef */
+
 	module.exports = function(app) {
 	  app.factory('Widget', ['$http', '$window',
 	    function($http, $window) {
-	      var baseURI = ("http://localhost:8080") + '/widget/'
+	      var baseURI = ("http://localhost:8080") + '/widget/';
 	      return {
 	        widgets: [],
-	        getAllWidgets: function(){
-	        	return $http.get(baseURI);
+	        getAllWidgets: function() {
+	          return $http.get(baseURI);
 	        },
 	        addWidget: function(widgetToAdd) {
-	          var URI = baseURI + 'new'
+	          var URI = baseURI + 'new';
 	          return $http.post(URI, widgetToAdd);
 	        },
 	        editWidget: function(widgetToEdit) {
@@ -32582,10 +32588,11 @@
 	          var URI = baseURI + widgetToEdit._id;
 	          return $http.delete(URI);
 	        }
-	      }
+	      };
 	    }
 	  ]);
-	}
+	};
+
 
 /***/ },
 /* 13 */
@@ -32784,7 +32791,7 @@
 	              console.log(err);
 	            });
 
-	            // Get Widgets
+	          // Get Widgets
 	          Widget.getAllWidgets()
 	            .then(function(res) {
 	              $scope.widgets = res.data;
@@ -32793,6 +32800,7 @@
 	            });
 
 	        };
+
 	        $scope.getLocation = function() {
 	          GeoLocation.getLocation();
 	        };
@@ -42691,8 +42699,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(19)(app);
-	}
+	  __webpack_require__(19)(app);
+	};
+
 
 /***/ },
 /* 19 */
@@ -42709,8 +42718,8 @@
 	        // User object
 	        $scope.user = {
 	          name: {
-	            first: "",
-	            last: "",
+	            first: '',
+	            last: ''
 	          }
 	        };
 
@@ -42719,7 +42728,7 @@
 	          Butler.getUser().then(function(res) {
 	            $scope.user = res.data;
 	          });
-	        }
+	        };
 
 	        // Update User
 	        $scope.updateUser = function() {
@@ -42727,19 +42736,21 @@
 	            .then(function(res) {
 	              console.log(res);
 	            });
-	        }
+	        };
 	      }
-	    }
+	    };
 	  });
-	}
+	};
+
 
 /***/ },
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(21)(app);
-	}
+	  __webpack_require__(21)(app);
+	};
+
 
 /***/ },
 /* 21 */
@@ -42762,14 +42773,13 @@
 	          // Add Widget
 	          Widget.addWidget($scope.newWidget)
 	            .then(function(res) {
-	              $scope.current = "";
-	              $scope.destination = "";
+	              $scope.current = '';
+	              $scope.destination = '';
 	              $scope.newWidget = {
 	                options: {}
-	              }
+	              };
 	            });
-	        }
-
+	        };
 
 	        // Add Widget
 	        $scope.addWidget = function() {
@@ -42786,12 +42796,12 @@
 	                $scope.newWidget.options.origin = {
 	                  lat: res[0].data.results[0].locations[0].latLng.lat,
 	                  long: res[0].data.results[0].locations[0].latLng.lng
-	                }
+	                };
 	                // Destination
 	                $scope.newWidget.options.destination = {
 	                  lat: res[1].data.results[0].locations[0].latLng.lat,
 	                  long: res[1].data.results[0].locations[0].latLng.lng
-	                }
+	                };
 	                // Create Widget
 	                $scope.actuallyAdd();
 	              });
@@ -42819,11 +42829,12 @@
 	            .then(function(res) {
 	              console.log(res);
 	            });
-	        }
+	        };
 	      }
-	    }
+	    };
 	  });
-	}
+	};
+
 
 /***/ }
 /******/ ]);

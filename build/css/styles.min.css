@@ -6,8 +6,8 @@ a {
 
 body, html, .fullscreen {
   height: 100%;
-  padding: 0px;
-  margin: 0px; }
+  margin: 0px auto;
+  padding: 0px auto; }
 
 nav {
   height: 100px;
