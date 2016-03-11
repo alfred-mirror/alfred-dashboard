@@ -4,13 +4,6 @@ module.exports = function(app) {
     function($http, $window) {
       return {
         getLocation: function() {
-          // navigator.geolocation.getCurrentPosition(function(position) {
-          //   var lat = position.coords.latitude;
-          //   var long = position.coords.longitude;
-          //   var location = lat + ', ' + long;
-          //   console.log(location);
-          //   return location;
-          // });
           return new Promise(function(resolve) {
             navigator.geolocation.getCurrentPosition(function(position) {
               var location = position.coords;
@@ -21,7 +14,7 @@ module.exports = function(app) {
         },
         // TODO: link variables to .env inputs
         geocoding: function() {
-          var address = 'ADDRESS';
+          var address = '588 Bell St, Seattle WA';
           var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
           var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
           console.log(locationURI);
