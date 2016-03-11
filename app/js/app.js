@@ -11,6 +11,8 @@ require('./components/auth/auth-index.js')(alfred);
 require('./components/dashboard/dashboard-index.js')(alfred);
 // Require User 
 require('./components/user/user-index.js')(alfred);
+// Require Widget 
+require('./components/widget/widget-index.js')(alfred);
 
 // Add Token Middleware
 alfred
