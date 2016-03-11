@@ -4,6 +4,8 @@
 }
 .profile-container {
   @include global-module($color-global-white, $color-pri-slate);
+  margin: 0;
+  padding: 0.5em 0;
 }
 .nav-container {
   background-color: $color-tert-orange;
@@ -11,8 +13,10 @@
   .config-container {
     @include global-module($color-pri-slate, $color-tert-orange);
     height: 3.5em;
+    letter-spacing: 3px;
 
     .config-item {
+      background-color: lighten($color-tert-orange, 15%);
       font-family: 'Josefin Sans';
       font-size: 1em;
       font-weight: 700;
@@ -20,12 +24,20 @@
       height: 100%;
       margin: 0;
       padding: 1.2rem 0 0 0;
+      letter-spacing: 1px;
       &:hover {
-        background-color: lighten($color-tert-orange, 15%);
+        background-color: lighten($color-tert-orange, 25%);
       }
+    }
+
+    .btn {
+      @include btn($color-sec-orange, none, false);
+      font-weight: 700;
     }
   }
 }
+
+.config-border { border-bottom: 1px solid $color-sec-slate !important; }
 
 .logo-container {
   @include img-background('/images/main_logo_dashboard.svg')
@@ -45,15 +57,17 @@
   }
 }
 
-.row p, .row img {
-  text-align: left;
-  vertical-align: center;
-  padding-left: 2em;
-  width: 30px;
-  height: auto;
-}
-
-.row img {
-  float: right;
-  padding-right: 2em;
+.row {
+  img {
+    height: 30px;
+    width: auto;
+    margin: 1.1em 0;
+  }
+  .widget-label {
+    padding-top: 1.1em;
+    text-align: left;
+    vertical-align: center;
+    font-family: $type-header;
+    font-size: 1.2em;
+  }
 }

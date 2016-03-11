@@ -18,6 +18,12 @@ module.exports = function(app) {
         $scope.state = {
           editing: false
         };
+        $scope.profile = {
+          editing: false
+        };
+        $scope.widget = {
+          add: false
+        };
         // Store UserId
         $scope.user_id = $window.sessionStorage._id;
         // Show Auth Container
@@ -53,6 +59,13 @@ module.exports = function(app) {
               console.log(err);
             });
         };
+        $scope.editUser = function(user) {
+          $scope.profile.editing = true;
+        };
+
+        $scope.addWidget = function() {
+          $scope.widget.add = true;
+        };
 
         // Edit Config File
         $scope.editConfig = function(config) {
@@ -84,7 +97,7 @@ module.exports = function(app) {
             });
 
         };
-        
+
         $scope.getLocation = function() {
           GeoLocation.getLocation();
         };

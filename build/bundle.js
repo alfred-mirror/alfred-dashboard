@@ -32714,6 +32714,12 @@
 	        $scope.state = {
 	          editing: false
 	        };
+	        $scope.profile = {
+	          editing: false
+	        };
+	        $scope.widget = {
+	          add: false
+	        };
 	        // Store UserId
 	        $scope.user_id = $window.sessionStorage._id;
 	        // Show Auth Container
@@ -32737,7 +32743,7 @@
 	          Butler.updateUser(user).then(function(res) {
 	            console.log(res);
 	          });
-	        }
+	        };
 
 	        // Set config
 	        $scope.setConfig = function(config) {
@@ -32748,7 +32754,14 @@
 	            }, function(err) {
 	              console.log(err);
 	            });
-	        }
+	        };
+	        $scope.editUser = function(user) {
+	          $scope.profile.editing = true;
+	        };
+
+	        $scope.addWidget = function() {
+	          $scope.widget.add = true;
+	        };
 
 	        // Edit Config File
 	        $scope.editConfig = function(config) {
@@ -32772,7 +32785,7 @@
 	            });
 
 	            // Get Widgets
-	            Widget.getAllWidgets()
+	          Widget.getAllWidgets()
 	            .then(function(res) {
 	              $scope.widgets = res.data;
 	              Widget.widgets = res.data;
