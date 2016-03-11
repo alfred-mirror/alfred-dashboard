@@ -15,9 +15,15 @@ module.exports = function(app) {
         $scope.configs = [];
         $scope.widgets = [];
         $scope.currentConfig = {};
+
+
         $scope.state = {
-          editing: false
+          editing: false,
+          addWidget: false,
+          updateProfile: false
         };
+
+
         $scope.profile = {
           editing: false
         };
@@ -59,6 +65,7 @@ module.exports = function(app) {
               console.log(err);
             });
         };
+        
         $scope.editUser = function(user) {
           $scope.profile.editing = true;
         };

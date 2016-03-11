@@ -32718,9 +32718,15 @@
 	        $scope.configs = [];
 	        $scope.widgets = [];
 	        $scope.currentConfig = {};
+
+
 	        $scope.state = {
-	          editing: false
+	          editing: false,
+	          addWidget: false,
+	          updateProfile: false
 	        };
+
+
 	        $scope.profile = {
 	          editing: false
 	        };
@@ -32762,6 +32768,7 @@
 	              console.log(err);
 	            });
 	        };
+	        
 	        $scope.editUser = function(user) {
 	          $scope.profile.editing = true;
 	        };

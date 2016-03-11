@@ -37,6 +37,21 @@
   }
 }
 
+.user-form {
+  @include form;
+  padding-top: 1em;
+  input {
+    height: 2.5em;
+    margin-right: 0;
+  }
+  button {
+    @include btn($color-sec-orange, none, false);
+    font-weight: 700;
+    padding: 1.2em 0;
+    margin-top: 1em;
+  }
+}
+
 .config-border { border-bottom: 1px solid $color-sec-slate !important; }
 
 .logo-container {
