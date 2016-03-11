@@ -15,7 +15,6 @@ module.exports = function(app) {
           // Add Widget
           Widget.addWidget($scope.newWidget)
             .then(function(res) {
-              Widget.widgets.push(res);
               $scope.current = "";
               $scope.destination = "";
               $scope.newWidget = {
