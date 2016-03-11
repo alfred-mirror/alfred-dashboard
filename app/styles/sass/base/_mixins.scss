@@ -4,7 +4,8 @@
   text-align: center;
   h1, h2, h3 {
     font-family: $type-body, Arial;
-    font-weight: 700;
+    font-size: 1.2em;
+    font-weight: lighter;
   }
   p, label {
     font-family: $type-header, sans-serif;
@@ -23,17 +24,17 @@
 
 @mixin btn($background, $border-color: none, $rounded: false) {
   background-color: $background;
+  color: $color-global-white;
+  border: none;
   @if $border-color != none { border: 2px solid $border-color; }
   font-family: $type-header;
   font-size: 1em;
   line-height: 1;
-  padding: 0.5em 1.5em;
-  margin: 1em 0;
   @if $rounded == true {
     border-radius: 5px;
   }
   &:hover {
-    background-color: lighten($background, 25%);
+    background-color: lighten($background, 10%);
   }
 }
 

@@ -5,35 +5,37 @@
 			<!-- SVG Logo Container -->
 		</section>
 		<section class="profile-container col-xs-12">
-			<h1>Welcome</h1>
-			<user></user>
+			<h1>WELCOME</h1>
 		</section>
 		<section data-ng-init="getLocation()" class="col-xs-12">
 			<article data-ng-init="geocoding()" class="config-container row" data-ng-repeat="config in configs" data-ng-click="editConfig(config)">
-				<h3 class="config-item col-xs-12 middle-xs">SETTINGS</h3>
-				<h3 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h3>
+				<h4 data-ng-click="editUser()" class="config-item col-xs-12 middle-xs">SETTINGS</h4>
+				<user data-ng-if="profile.editing"></user>
+				<h4 data-ng-click="logout()" class="config-item col-xs-12 middle-xs">LOGOUT</h4>
 				<h3 class="profile-container col-xs-12 middle-xs">MIRROR CONFIGS</h3>
-				<h3 data-ng-click="getConfig()" class="config-item col-xs-12">{{ config.name | uppercase }}</h3>
-				<button data-ng-click="setConfig(config)">Send</button>
+				<h4 data-ng-click="getConfig()" class="config-border config-item col-xs-6">{{ config.name | uppercase }}</h4>
+				<button data-ng-click="setConfig(config)" class="config-border col-xs-6 btn">SEND</button>
 			</article>
 		</section>
 	</section>
 	</bdi>
 	<section class="config-editor col-md-3" data-ng-if="state.editing">
-		<bdi id="fullscreen" class="row">
+		<bdi id="fullscreen" class="row profile-container">
 		<bdi class="col-xs-12">
 		<h3>WIDGET BANK</h3>
 		<section class="row" id="widgetBank" drop-container
 			on-drop="onDrop($event, $dragData)">
-			<widget-form></widget-form>
+			<button data-ng-click="addWidget()" class="col-xs-12 btn">ADD A WIDGET</button>
+			<widget-form data-ng-if="widget.add" class="col-xs-12"></widget-form>
 			<article data-ng-repeat="widget in widgets" drag-container="model" drag-data="{widget: widget}" id="{{widget._id}}" class="widget col-xs-12">
-				{{widget.name}}<br />
-				{{widget.type}}<br />
-				<img src="/images/{{widget.type}}.svg" alt="weather">
+				<bdi class="row">
+					<section class="widget-label col-xs-6">{{ widget.name }} ({{ widget.type }})</section>
+					<img class="col-xs-6" src="/images/{{widget.type}}.svg" alt="weather">
+				</bdi>
 			</article>
-			
-			
-			
+
+
+
 		</section>
 		</bdi>
 		</bdi>

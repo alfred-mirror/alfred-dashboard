@@ -32721,6 +32721,12 @@
 	        $scope.state = {
 	          editing: false
 	        };
+	        $scope.profile = {
+	          editing: false
+	        };
+	        $scope.widget = {
+	          add: false
+	        };
 	        // Store UserId
 	        $scope.user_id = $window.sessionStorage._id;
 	        // Show Auth Container
@@ -32756,6 +32762,13 @@
 	              console.log(err);
 	            });
 	        };
+	        $scope.editUser = function(user) {
+	          $scope.profile.editing = true;
+	        };
+
+	        $scope.addWidget = function() {
+	          $scope.widget.add = true;
+	        };
 
 	        // Edit Config File
 	        $scope.editConfig = function(config) {
@@ -32787,7 +32800,7 @@
 	            });
 
 	        };
-	        
+
 	        $scope.getLocation = function() {
 	          GeoLocation.getLocation();
 	        };
