@@ -52,12 +52,12 @@
 	// Require Services
 	__webpack_require__(6)(alfred);
 	// Require Auth
-	__webpack_require__(13)(alfred);
+	__webpack_require__(14)(alfred);
 	// Require Dashboard
-	__webpack_require__(15)(alfred);
-	// Require User 
+	__webpack_require__(16)(alfred);
+	// Require User
 	__webpack_require__(18)(alfred);
-	// Require Widget 
+	// Require Widget
 	__webpack_require__(20)(alfred);
 
 	// Add Token Middleware
@@ -66,38 +66,39 @@
 	    $httpProvider.interceptors.push('authInterceptor');
 	  })
 
-	.config(['$routeProvider', '$locationProvider',
-	  function(routeProvider, locationProvider) {
-	    routeProvider
-	      .when('/', {
-	        templateUrl: 'templates/auth.html'
-	      })
-	      .when('/dashboard', {
-	        template: '<dashboard></dashboard>',
-	        controller: 'HomeController'
-	      })
-	  }
-	])
+	  .config(['$routeProvider', '$locationProvider',
+	    function(routeProvider, locationProvider) {
+	      routeProvider
+	        .when('/', {
+	          templateUrl: 'templates/auth.html'
+	        })
+	        .when('/dashboard', {
+	          template: '<dashboard></dashboard>',
+	          controller: 'HomeController'
+	        });
+	    }
+	  ])
 
-	.run(function($window, EE, $rootScope, $location) {
-	  if ($window.sessionStorage.token && $window.sessionStorage._id) {
-	    $rootScope.authenticated = true;
-	  }
+	  .run(function($window, EE, $rootScope, $location) {
+	    if ($window.sessionStorage.token && $window.sessionStorage._id) {
+	      $rootScope.authenticated = true;
+	    }
 
-	  $rootScope.$on('USER_AUTHENTICATED', function() {
-	    $location.path('/dashboard');
-	  });
-	})
-
-	.controller('HomeController', ['$scope',
-	  function($scope) {
-	    $scope.userAuthenticated = false;
-
-	    $scope.$on('USER_AUTHENTICATED', function() {
-	      $scope.userAuthenticated = true;
+	    $rootScope.$on('USER_AUTHENTICATED', function() {
+	      $location.path('/dashboard');
 	    });
-	  }
-	]);
+	  })
+
+	  .controller('HomeController', ['$scope',
+	    function($scope) {
+	      $scope.userAuthenticated = false;
+
+	      $scope.$on('USER_AUTHENTICATED', function() {
+	        $scope.userAuthenticated = true;
+	      });
+	    }
+	  ]);
+
 
 /***/ },
 /* 1 */
@@ -32386,9 +32387,9 @@
 	  __webpack_require__(7)(app);
 	  __webpack_require__(8)(app);
 	  __webpack_require__(9)(app);
-	  __webpack_require__(10)(app);
 	  __webpack_require__(11)(app);
 	  __webpack_require__(12)(app);
+	  __webpack_require__(13)(app);
 	};
 
 
@@ -32445,6 +32446,9 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* eslint-disable no-undef */
+	var j = __webpack_require__(10);
+
 	// Handles Token Retrevial and Creation
 	module.exports = function(app) {
 	  app.factory('AuthFactory', ['$http', '$window', '$location',
@@ -32483,6 +32487,17 @@
 	          delete $window.sessionStorage.token;
 	          delete $window.sessionStorage._id;
 	          $location.path('/');
+	        },
+
+	        passwordValidation: function(data) {
+	          if (data.password !== data.passwordCheck) {
+	            return true;
+	          }
+	          else if (data.password.length < 7) {
+	            return true;
+	          } else {
+	            return false;
+	          }
 	        }
 	      };
 	    }
@@ -32492,365 +32507,6 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	module.exports = function(app) {
-	  app.factory('Butler', ['$http', '$window',
-	    function($http, $window) {
-	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
-
-	      return {
-	        // Load User Preferences
-	        getConfig: function() {
-	          return $http.get(baseURI);
-	        },
-	        updateConfig: function(config) {
-	          var URI = baseURI + '/' + config._id;
-	          return $http.put(URI, config);
-	        },
-	        setConfig: function(config) {
-	          var URI = baseURI + '/setConfig/' + config._id;
-	          return $http.post(URI);
-	        },
-	        getUser: function() {
-	          var URI = ("http://localhost:8080") + '/user/' + $window.sessionStorage._id;
-	          return $http.get(URI);
-	        },
-	        updateUser: function(user) {
-	          var URI = ("http://localhost:8080") + '/user/update/' + $window.sessionStorage._id;
-	          return $http.put(URI, user);
-	        }
-	      };
-	    }
-	  ]);
-	};
-
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	module.exports = function(app) {
-	  app.factory('GeoLocation', ['$http', '$window',
-	    function($http, $window) {
-	      return {
-	        getLocation: function() {
-	          return new Promise(function(resolve) {
-	            navigator.geolocation.getCurrentPosition(function(position) {
-	              var location = position.coords;
-	              console.log(location.latitude + ', ' + location.longitude);
-	              resolve(location);
-	            });
-	          });
-	        },
-	        // TODO: link variables to .env inputs
-	        geocoding: function(address) {
-	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
-	          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
-	          console.log(locationURI);
-	          return $http.get(locationURI);
-	        }
-	      };
-	    }
-	  ]);
-	};
-
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-	  app.factory('Widget', ['$http', '$window',
-	    function($http, $window) {
-	      var baseURI = ("http://localhost:8080") + '/widget/'
-	      return {
-	        widgets: [],
-	        getAllWidgets: function(){
-	        	return $http.get(baseURI);
-	        },
-	        addWidget: function(widgetToAdd) {
-	          var URI = baseURI + 'new'
-	          return $http.post(URI, widgetToAdd);
-	        },
-	        editWidget: function(widgetToEdit) {
-	          var URI = baseURI + widgetToEdit._id;
-	          return $http.put(URI, widgetToEdit);
-	        },
-	        removeWidget: function(widgetToRemove) {
-	          var URI = baseURI + widgetToEdit._id;
-	          return $http.delete(URI);
-	        }
-	      }
-	    }
-	  ]);
-	}
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app){
-	  __webpack_require__(14)(app);
-	};
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	module.exports = function(app) {
-	  app.controller('AuthController', ['$scope', '$rootScope', 'EE', '$window',
-	    '$timeout',
-	    function($scope, $rootScope, EE, $window, $timeout) {
-	      if ($rootScope.authenticated) {
-	        $timeout(function() {
-	          EE.emit('USER_AUTHENTICATED', $window.sessionStorage._id);
-	        }, 100);
-
-	      } else {
-	        $scope.showAuthBox = true;
-	        $rootScope.authenticated = true;
-	      }
-
-	      $scope.$on('USER_AUTHENTICATED', () => {
-	        $scope.showAuthBox = false;
-	      });
-	    }
-	  ])
-	  // Login Controller
-	  .controller('LoginController', ['$scope', '$location', '$window',
-	    'EE', 'AuthFactory', '$rootScope',
-	    function($scope, $location, $window, EE, AuthFactory, $rootScope) {
-	      // Login function
-	      $scope.login = function(loginModel) {
-	        console.log('login called');
-	        console.log(loginModel);
-	        // Call login function from Auth Factory
-	        AuthFactory.login(loginModel).then(function(res) {
-	          // Check for token
-	          if (res.data.token) {
-	            // Save token
-	            console.log(res.data.token);
-	            $window.sessionStorage.token = res.data.token;
-	            // Save user ID
-	            $window.sessionStorage._id = res.data.user._id;
-	            // Broadcast event and user ID
-	            EE.emit('USER_AUTHENTICATED', res.data.user._id);
-
-	          } else {
-	            // Alert no user
-	            console.log('else block');
-	            $rootScope.loginMessage = 'No User Found.';
-	          }
-	          // Check for error
-	        }, function(err) {
-	          $rootScope.loginMessage = err.data.msg;
-	        });
-	      };
-	    }
-	  ])
-	  //Register Controller
-	  .controller('RegisterController', ['$scope', '$location', '$window',
-	    'EE', 'AuthFactory', '$rootScope',
-	    function($scope, $location, $window, EE, AuthFactory, $rootScope) {
-	      // Login function
-	      $scope.register = function(registerModel) {
-	        console.log('inside $scope.register function');
-	        AuthFactory.register(registerModel).then(function(res) {
-	          if (res.data.token) {
-	            // Save token
-	            $window.sessionStorage.token = res.data.token;
-	            // Save user ID
-	            $window.sessionStorage._id = res.data.user._id;
-	            // Broadcast event and user ID
-	            EE.emit('USER_AUTHENTICATED', res.data.user._id);
-	          } else {
-	            // Alert no user
-	            $rootScope.loginMessage = 'Email already registered.';
-	          }
-	          // Check for error
-	        }, function(err) {
-	          $rootScope.loginMessage =
-	            'There was an error. Please try again.';
-	        });
-	      };
-	    }
-	  ]);
-	};
-
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-	  __webpack_require__(16)(app);
-	};
-
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	const j = __webpack_require__(17);
-
-	module.exports = function(app) {
-	  app.directive('dashboard', function() {
-
-	    return {
-	      restrict: 'AEC',
-	      replace: true,
-	      templateUrl: 'templates/dashboard.html',
-	      scope: {
-	        options: '='
-	      },
-	      controller: function($scope, Butler, $window, AuthFactory, GeoLocation, Widget) {
-
-	        $scope.configs = [];
-	        $scope.widgets = [];
-	        $scope.currentConfig = {};
-	        $scope.state = {
-	          editing: false
-	        };
-	        $scope.profile = {
-	          editing: false
-	        };
-	        $scope.widget = {
-	          add: false
-	        };
-	        // Store UserId
-	        $scope.user_id = $window.sessionStorage._id;
-	        // Show Auth Container
-	        $scope.$on('USER_AUTHENTICATED', function() {
-	          $scope.getConfig();
-	        });
-	        // Update config file on server
-	        $scope.updateConfig = function(config) {
-	          // Update config on server
-	          Butler.updateConfig(config)
-	            .then(function(res) {
-	              // Update Events
-	              $scope.getConfig();
-	            }, function(err) {
-	              // Error
-	              console.log(err);
-	            });
-	        };
-	        // Update user
-	        $scope.updateUser = function(user) {
-	          Butler.updateUser(user).then(function(res) {
-	            console.log(res);
-	          });
-	        };
-
-	        // Set config
-	        $scope.setConfig = function(config) {
-	          Butler.setConfig(config)
-	            .then(function(res) {
-	              console.log('config set!');
-	              console.log(res.data);
-	            }, function(err) {
-	              console.log(err);
-	            });
-	        };
-	        $scope.editUser = function(user) {
-	          $scope.profile.editing = true;
-	        };
-
-	        $scope.addWidget = function() {
-	          $scope.widget.add = true;
-	        };
-
-	        // Edit Config File
-	        $scope.editConfig = function(config) {
-	          $scope.currentConfig = config;
-	          $scope.state.editing = true;
-	        };
-	        // Logout
-	        $scope.logout = function() {
-	          AuthFactory.logout();
-	        };
-	        /// Load user preferences
-	        $scope.getConfig = function() {
-
-	          // Get Config
-	          Butler.getConfig()
-	            .then(function(res) {
-	              console.log(res.data);
-	              $scope.configs = res.data;
-	            }, function(err) {
-	              console.log(err);
-	            });
-
-	            // Get Widgets
-	          Widget.getAllWidgets()
-	            .then(function(res) {
-	              $scope.widgets = res.data;
-	              Widget.widgets = res.data;
-	              console.log(res.data);
-	            });
-
-	        };
-	        $scope.getLocation = function() {
-	          GeoLocation.getLocation();
-	        };
-
-	        $scope.geocoding = function() {
-	          GeoLocation.geocoding()
-	            .then(function(res) {
-	              console.log('lat ' + res.data.results[0].locations[0].latLng.lat);
-	              console.log('lng ' + res.data.results[0].locations[0].latLng.lng);
-	            }, function(err) {
-	              console.log(err);
-	            });
-	        };
-
-	        $scope.onDrop = function(e, data) {
-	          console.log(data);
-	          var hasAWidget = j(e.target).has('article').length > 0;
-	          var id_of_droppable = j(e.target).attr('id');
-	          var id_of_draggable = j('#' + data.widget._id).parent().attr('id');
-
-	          // scenario: trying to overload a pref
-	          if (hasAWidget && id_of_droppable !== 'widgetBank'){
-	            return console.log('already has a widget');
-	          }
-
-	          // cache element and add the widget to the box
-	          var widget = j('#' + data.widget._id);
-	          j(e.target).append(widget);
-
-	          // check if we're dropping into the bank
-	          if (id_of_droppable === 'widgetBank') {
-	            // scenario: bank to bank
-	            if (id_of_droppable == id_of_draggable) {
-	              return;
-	            }
-	            $scope.currentConfig.modules[id_of_draggable] = undefined;
-	            return;
-	          }
-
-	          // add the widget to the module at correct position
-	          $scope.currentConfig.modules[id_of_droppable] = data.widget._id;
-
-	          // scenario: bank to prefs
-	          if (id_of_draggable === 'widgetBank') {
-	            return;
-	          }
-
-	          // remove it from the modules index
-	          $scope.currentConfig.modules[id_of_draggable] = undefined;
-	        };
-	      }
-	    };
-	  });
-	};
-
-
-/***/ },
-/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -42687,12 +42343,383 @@
 
 
 /***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-disable no-undef */
+
+	module.exports = function(app) {
+	  app.factory('Butler', ['$http', '$window',
+	    function($http, $window) {
+	      const baseURI = ("http://localhost:8080") + '/dashboard/config';
+
+	      return {
+	        // Load User Preferences
+	        getConfig: function() {
+	          return $http.get(baseURI);
+	        },
+	        updateConfig: function(config) {
+	          var URI = baseURI + '/' + config._id;
+	          return $http.put(URI, config);
+	        },
+	        setConfig: function(config) {
+	          var URI = baseURI + '/setConfig/' + config._id;
+	          return $http.post(URI);
+	        },
+	        getUser: function() {
+	          var URI = ("http://localhost:8080") + '/user/' + $window.sessionStorage._id;
+	          return $http.get(URI);
+	        },
+	        updateUser: function(user) {
+	          var URI = ("http://localhost:8080") + '/user/update/' + $window.sessionStorage._id;
+	          return $http.put(URI, user);
+	        }
+	      };
+	    }
+	  ]);
+	};
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.factory('GeoLocation', ['$http', '$window',
+	    function($http, $window) {
+	      return {
+	        getLocation: function() {
+	          return new Promise(function(resolve) {
+	            navigator.geolocation.getCurrentPosition(function(position) {
+	              var location = position.coords;
+	              console.log(location.latitude + ', ' + location.longitude);
+	              resolve(location);
+	            });
+	          });
+	        },
+	        // TODO: link variables to .env inputs
+	        geocoding: function(address) {
+	          var key = 'YYPegISg2qDL5oyBePy69GouYxOj1aeU';
+	          var locationURI = 'http://www.mapquestapi.com/geocoding/v1/address?key=' + key + '&location=' + address;
+	          console.log(locationURI);
+	          return $http.get(locationURI);
+	        }
+	      };
+	    }
+	  ]);
+	};
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-disable no-undef */
+
+	module.exports = function(app) {
+	  app.factory('Widget', ['$http', '$window',
+	    function($http, $window) {
+	      var baseURI = ("http://localhost:8080") + '/widget/';
+	      return {
+	        widgets: [],
+	        getAllWidgets: function() {
+	          return $http.get(baseURI);
+	        },
+	        addWidget: function(widgetToAdd) {
+	          var URI = baseURI + 'new';
+	          return $http.post(URI, widgetToAdd);
+	        },
+	        editWidget: function(widgetToEdit) {
+	          var URI = baseURI + widgetToEdit._id;
+	          return $http.put(URI, widgetToEdit);
+	        },
+	        removeWidget: function(widgetToRemove) {
+	          var URI = baseURI + widgetToEdit._id;
+	          return $http.delete(URI);
+	        }
+	      };
+	    }
+	  ]);
+	};
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app){
+	  __webpack_require__(15)(app);
+	};
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.controller('AuthController', ['$scope', '$rootScope', 'EE', '$window',
+	    '$timeout',
+	    function($scope, $rootScope, EE, $window, $timeout) {
+	      if ($rootScope.authenticated) {
+	        $timeout(function() {
+	          EE.emit('USER_AUTHENTICATED', $window.sessionStorage._id);
+	        }, 100);
+
+	      } else {
+	        $scope.showAuthBox = true;
+	        $rootScope.authenticated = true;
+	      }
+
+	      $scope.$on('USER_AUTHENTICATED', () => {
+	        $scope.showAuthBox = false;
+	      });
+	    }
+	  ])
+	  // Login Controller
+	  .controller('LoginController', ['$scope', '$location', '$window',
+	    'EE', 'AuthFactory', '$rootScope',
+	    function($scope, $location, $window, EE, AuthFactory, $rootScope) {
+	      // Login function
+	      $scope.login = function(loginModel) {
+	        console.log('login called');
+	        console.log(loginModel);
+	        // Call login function from Auth Factory
+	        AuthFactory.login(loginModel).then(function(res) {
+	          // Check for token
+	          if (res.data.token) {
+	            // Save token
+	            console.log(res.data.token);
+	            $window.sessionStorage.token = res.data.token;
+	            // Save user ID
+	            $window.sessionStorage._id = res.data.user._id;
+	            // Broadcast event and user ID
+	            EE.emit('USER_AUTHENTICATED', res.data.user._id);
+
+	          } else {
+	            // Alert no user
+	            console.log('else block');
+	            $rootScope.loginMessage = 'No User Found.';
+	          }
+	          // Check for error
+	        }, function(err) {
+	          $rootScope.loginMessage = err.data.msg;
+	        });
+	      };
+	    }
+	  ])
+	  //Register Controller
+	  .controller('RegisterController', ['$scope', '$location', '$window',
+	    'EE', 'AuthFactory', '$rootScope',
+	    function($scope, $location, $window, EE, AuthFactory, $rootScope) {
+	      // Login function
+	      $scope.checkPass = function(registerModel) {
+	        $scope.valid = false;
+	        $scope.valid = AuthFactory.passwordValidation(registerModel);
+	        console.log($scope.valid);
+	      };
+
+	      $scope.register = function(registerModel) {
+	        console.log('inside $scope.register function');
+	        AuthFactory.register(registerModel).then(function(res) {
+	          if (res.data.token) {
+	            // Save token
+	            $window.sessionStorage.token = res.data.token;
+	            // Save user ID
+	            $window.sessionStorage._id = res.data.user._id;
+	            // Broadcast event and user ID
+	            EE.emit('USER_AUTHENTICATED', res.data.user._id);
+	          } else {
+	            // Alert no user
+	            $rootScope.loginMessage = 'Email already registered.';
+	          }
+	          // Check for error
+	        }, function(err) {
+	          $rootScope.loginMessage =
+	            'There was an error. Please try again.';
+	        });
+	      };
+	    }
+	  ]);
+	};
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+	  __webpack_require__(17)(app);
+	};
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const j = __webpack_require__(10);
+
+	module.exports = function(app) {
+	  app.directive('dashboard', function() {
+
+	    return {
+	      restrict: 'AEC',
+	      replace: true,
+	      templateUrl: 'templates/dashboard.html',
+	      scope: {
+	        options: '='
+	      },
+	      controller: function($scope, Butler, $window, AuthFactory, GeoLocation, Widget) {
+
+	        $scope.configs = [];
+	        $scope.widgets = [];
+	        $scope.currentConfig = {};
+	        $scope.state = {
+	          editing: false
+	        };
+	        $scope.profile = {
+	          editing: false
+	        };
+	        $scope.widget = {
+	          add: false
+	        };
+	        // Store UserId
+	        $scope.user_id = $window.sessionStorage._id;
+	        // Show Auth Container
+	        $scope.$on('USER_AUTHENTICATED', function() {
+	          $scope.getConfig();
+	        });
+	        // Update config file on server
+	        $scope.updateConfig = function(config) {
+	          // Update config on server
+	          Butler.updateConfig(config)
+	            .then(function(res) {
+	              // Update Events
+	              $scope.getConfig();
+	            }, function(err) {
+	              // Error
+	              console.log(err);
+	            });
+	        };
+	        // Update user
+	        $scope.updateUser = function(user) {
+	          Butler.updateUser(user).then(function(res) {
+	            console.log(res);
+	          });
+	        };
+
+	        // Set config
+	        $scope.setConfig = function(config) {
+	          Butler.setConfig(config)
+	            .then(function(res) {
+	              console.log('config set!');
+	              console.log(res.data);
+	            }, function(err) {
+	              console.log(err);
+	            });
+	        };
+	        $scope.editUser = function(user) {
+	          $scope.profile.editing = true;
+	        };
+
+	        $scope.addWidget = function() {
+	          $scope.widget.add = true;
+	        };
+
+	        // Edit Config File
+	        $scope.editConfig = function(config) {
+	          $scope.currentConfig = config;
+	          $scope.state.editing = true;
+	        };
+	        // Logout
+	        $scope.logout = function() {
+	          AuthFactory.logout();
+	        };
+	        /// Load user preferences
+	        $scope.getConfig = function() {
+
+	          // Get Config
+	          Butler.getConfig()
+	            .then(function(res) {
+	              console.log(res.data);
+	              $scope.configs = res.data;
+	            }, function(err) {
+	              console.log(err);
+	            });
+
+	          // Get Widgets
+	          Widget.getAllWidgets()
+	            .then(function(res) {
+	              $scope.widgets = res.data;
+	              Widget.widgets = res.data;
+	              console.log(res.data);
+	            });
+
+	        };
+
+	        $scope.getLocation = function() {
+	          GeoLocation.getLocation();
+	        };
+
+	        $scope.geocoding = function() {
+	          GeoLocation.geocoding()
+	            .then(function(res) {
+	              console.log('lat ' + res.data.results[0].locations[0].latLng.lat);
+	              console.log('lng ' + res.data.results[0].locations[0].latLng.lng);
+	            }, function(err) {
+	              console.log(err);
+	            });
+	        };
+
+	        $scope.onDrop = function(e, data) {
+	          console.log(data);
+	          var hasAWidget = j(e.target).has('article').length > 0;
+	          var id_of_droppable = j(e.target).attr('id');
+	          var id_of_draggable = j('#' + data.widget._id).parent().attr('id');
+
+	          // scenario: trying to overload a pref
+	          if (hasAWidget && id_of_droppable !== 'widgetBank'){
+	            return console.log('already has a widget');
+	          }
+
+	          // cache element and add the widget to the box
+	          var widget = j('#' + data.widget._id);
+	          j(e.target).append(widget);
+
+	          // check if we're dropping into the bank
+	          if (id_of_droppable === 'widgetBank') {
+	            // scenario: bank to bank
+	            if (id_of_droppable == id_of_draggable) {
+	              return;
+	            }
+	            $scope.currentConfig.modules[id_of_draggable] = undefined;
+	            return;
+	          }
+
+	          // add the widget to the module at correct position
+	          $scope.currentConfig.modules[id_of_droppable] = data.widget._id;
+
+	          // scenario: bank to prefs
+	          if (id_of_draggable === 'widgetBank') {
+	            return;
+	          }
+
+	          // remove it from the modules index
+	          $scope.currentConfig.modules[id_of_draggable] = undefined;
+	        };
+	      }
+	    };
+	  });
+	};
+
+
+/***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(19)(app);
-	}
+	  __webpack_require__(19)(app);
+	};
+
 
 /***/ },
 /* 19 */
@@ -42709,8 +42736,8 @@
 	        // User object
 	        $scope.user = {
 	          name: {
-	            first: "",
-	            last: "",
+	            first: '',
+	            last: ''
 	          }
 	        };
 
@@ -42719,7 +42746,7 @@
 	          Butler.getUser().then(function(res) {
 	            $scope.user = res.data;
 	          });
-	        }
+	        };
 
 	        // Update User
 	        $scope.updateUser = function() {
@@ -42727,19 +42754,21 @@
 	            .then(function(res) {
 	              console.log(res);
 	            });
-	        }
+	        };
 	      }
-	    }
+	    };
 	  });
-	}
+	};
+
 
 /***/ },
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(21)(app);
-	}
+	  __webpack_require__(21)(app);
+	};
+
 
 /***/ },
 /* 21 */
@@ -42762,14 +42791,13 @@
 	          // Add Widget
 	          Widget.addWidget($scope.newWidget)
 	            .then(function(res) {
-	              $scope.current = "";
-	              $scope.destination = "";
+	              $scope.current = '';
+	              $scope.destination = '';
 	              $scope.newWidget = {
 	                options: {}
-	              }
+	              };
 	            });
-	        }
-
+	        };
 
 	        // Add Widget
 	        $scope.addWidget = function() {
@@ -42786,12 +42814,12 @@
 	                $scope.newWidget.options.origin = {
 	                  lat: res[0].data.results[0].locations[0].latLng.lat,
 	                  long: res[0].data.results[0].locations[0].latLng.lng
-	                }
+	                };
 	                // Destination
 	                $scope.newWidget.options.destination = {
 	                  lat: res[1].data.results[0].locations[0].latLng.lat,
 	                  long: res[1].data.results[0].locations[0].latLng.lng
-	                }
+	                };
 	                // Create Widget
 	                $scope.actuallyAdd();
 	              });
@@ -42819,11 +42847,12 @@
 	            .then(function(res) {
 	              console.log(res);
 	            });
-	        }
+	        };
 	      }
-	    }
+	    };
 	  });
-	}
+	};
+
 
 /***/ }
 /******/ ]);

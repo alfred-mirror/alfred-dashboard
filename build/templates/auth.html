@@ -17,10 +17,11 @@
 		<section class="auth-box register-box" data-ng-show="!login">
 			<div data-ng-controller="RegisterController">
 				<h2>REGISTER</h2>
-				<form class="pure-form pure-form-stacked" data-ng-submit="register(userRegisterData)">
+				<form class="pure-form pure-form-stacked" data-ng-submit="!valid && register(userRegisterData)">
 					<input placeholder="Email" class="input" type="email" name="email" ng-model="userRegisterData.email" />
 					<input placeholder="Password" class="input" type="password" name="password" ng-model="userRegisterData.password" />
-					<input placeholder="Confirm password" class="input" type="password" name="passwordCheck" ng-model="userRegisterData.passwordCheck" />
+					<input placeholder="Confirm password" class="input" type="password" name="passwordCheck" ng-model="userRegisterData.passwordCheck" ng-change="checkPass(userRegisterData)"/>
+					<p ng-if='valid'>Password invalid - confirm the passwords match and are greater than 6 characters</p>
 					<button type="submit" class="pure-button pure-button-primary">REGISTER</button>
 				</form>
 			</div>

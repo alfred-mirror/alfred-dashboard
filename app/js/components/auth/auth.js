@@ -54,6 +54,12 @@ module.exports = function(app) {
     'EE', 'AuthFactory', '$rootScope',
     function($scope, $location, $window, EE, AuthFactory, $rootScope) {
       // Login function
+      $scope.checkPass = function(registerModel) {
+        $scope.valid = false;
+        $scope.valid = AuthFactory.passwordValidation(registerModel);
+        console.log($scope.valid);
+      };
+
       $scope.register = function(registerModel) {
         console.log('inside $scope.register function');
         AuthFactory.register(registerModel).then(function(res) {
