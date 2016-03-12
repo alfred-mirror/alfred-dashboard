@@ -203,10 +203,36 @@ nav {
 
 .edit-widget-form-something label {
   text-align: left;
-  margin-top: 5px; }
+  margin-top: 10px; }
 
 .edit-widget-form-something input {
-  margin-top: 5px; }
+  margin-top: 10px; }
+
+.widgetSel {
+  background-color: black;
+  color: white;
+  font-family: "Josefin Sans";
+  min-height: 2em;
+  height: auto;
+  margin-bottom: 5px; }
+
+.widgetBtn {
+  background-color: #3F3F3F;
+  color: #FFFFFF;
+  border: none;
+  font-family: "Josefin Sans";
+  font-size: 1em;
+  line-height: 1;
+  padding: 1em 0;
+  margin: .5em 0; }
+  .widgetBtn:hover {
+    background-color: #595959; }
+
+.widgetLabel {
+  font-family: "Josefin Sans";
+  font-size: .8em;
+  padding: 5px;
+  margin: 5px; }
 
 .row img {
   height: 30px;
